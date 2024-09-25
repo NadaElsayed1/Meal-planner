@@ -9,9 +9,9 @@ import com.example.mealsplanner.model.MealDTO;
 
 @Database(entities = {MealDTO.class}, version = 1)
 public abstract class MealDatabase extends RoomDatabase {
-    private static MealDatabase instance;
+    private static MealDatabase instance = null;
 
-    public abstract MealDAO mealDao();
+    public abstract MealDAO getMealDao();
 
     public static synchronized MealDatabase getInstance(Context context) {
         if (instance == null) {
