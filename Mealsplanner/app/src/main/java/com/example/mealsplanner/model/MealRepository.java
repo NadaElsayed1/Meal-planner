@@ -47,51 +47,5 @@ public class MealRepository implements IMealRepository  {
         mealRemoteDataStructure.getMealOfTheDay(networkCallback);
 
     }
-
-//    @Override
-//    public void getAllMeals(NetworkCallback networkCallback) {
-//
-//    }
-//
-//    @Override
-//    public LiveData<List<Meal>> getStoredMeals() { return localDataSource.getStoredMeals(); }
-//
-//    @Override
-//    public void insertMeal(MealDTO meal) {
-//
-//    }
-//
-//    @Override
-//    public void deleteMeal(MealDTO meal) {
-//
-//    }
-//
-//    @Override
-//    public void checkMealExists(MealDTO meal) {
-//
-//    }
-//
-//    @Override
-//    public void insertDay(Day day) {
-//
-//    }
-//
-//    @Override
-//    public void insertDayMealEntry(DayMealJunction dayMealJunction) {
-//
-//    }
-//
-//    @Override
-//    public LiveData<List<Meal>> getMealsOfDay(int id) {
-//        return null;
-//    }
-//
-//    @Override
-//    public void insertMeal(Meal meal) { localDataSource.insertMeal(meal); }
-//
-//    @Override
-//    public void deleteMeal(Meal meal) { localDataSource.removeMeal(meal); }
-//
-//
 }
 

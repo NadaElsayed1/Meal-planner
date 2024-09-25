@@ -15,7 +15,7 @@ public class MealRemoteDataStructure {
     private static final String TAG = "MealOfTheDay";
     private static final String BASE_URL = "https://www.themealdb.com/api/json/v1/1/";
     private static MealRemoteDataStructure instance = null;
-    
+
     private MealService mealService;
 
 

@@ -12,10 +12,4 @@ public interface IMealRepository {
     public void getMealsByCategory(String category, NetworkCallback networkCallback);
     public void getMealsByCountry(String country, NetworkCallback networkCallback);
     public void getMealOfTheDay(NetworkCallback networkCallback);
-
-//    // Local Data Source - Meals
-//    public LiveData<List<MealDTO>> getStoredMeals();
-//    public void insertMeal(MealDTO meal);
-//    public void deleteMeal(MealDTO meal);
-//    public void checkMealExists(MealDTO meal);
 }
