@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mealsplanner.R;
 import com.example.mealsplanner.meal_of_the_day.presenter.MealOfTheDayPresenter;
 import com.example.mealsplanner.model.MealDTO;
-import com.example.mealsplanner.model.MealLocalDataSource;
+import com.example.mealsplanner.db.MealLocalDataSource;
 import com.example.mealsplanner.network.MealRemoteDataStructure;
 import com.example.mealsplanner.network.NetworkCallback;
 
@@ -52,11 +52,7 @@ public class MealOfTheDayActivity extends AppCompatActivity implements IMealOfTh
 
         /*presenter creation by passing the Activity object (which implement the interface) to a reference of interface(Activity interface)*/
         mealOfTheDayPresenter = new MealOfTheDayPresenter(APIClient,this);
-//        allProductpresenter.presenter();  // Correctly pass the view and repo
-        nc = mealOfTheDayPresenter;  // Assign the presenter as the callback
-
-        /*make network call*/
-        APIClient.getMealOfTheDay(nc);
+        mealOfTheDayPresenter.getMealOfTheDay();
     }
 
     @Override

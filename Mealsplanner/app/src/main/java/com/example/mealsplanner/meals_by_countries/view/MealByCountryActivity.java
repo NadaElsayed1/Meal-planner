@@ -5,19 +5,13 @@ import android.os.Bundle;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mealsplanner.R;
-import com.example.mealsplanner.meals_by_categories.presenter.MealByCategoryPresenter;
-import com.example.mealsplanner.meals_by_categories.view.MealByCategoryActivity;
-import com.example.mealsplanner.meals_by_categories.view.MealByCategoryAdapter;
 import com.example.mealsplanner.meals_by_countries.presenter.MealByCountryPresenter;
 import com.example.mealsplanner.model.MealDTO;
-import com.example.mealsplanner.model.MealLocalDataSource;
+import com.example.mealsplanner.db.MealLocalDataSource;
 import com.example.mealsplanner.network.MealRemoteDataStructure;
 import com.example.mealsplanner.network.NetworkCallback;
 

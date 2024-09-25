@@ -2,7 +2,6 @@ package com.example.mealsplanner.meal_of_the_day.presenter;
 
 import com.example.mealsplanner.meal_of_the_day.view.IMealOfTheDayActivity;
 import com.example.mealsplanner.model.MealDTO;
-import com.example.mealsplanner.model.MealLocalDataSource;
 import com.example.mealsplanner.network.MealRemoteDataStructure;
 import com.example.mealsplanner.network.NetworkCallback;
 
@@ -28,7 +27,7 @@ public class MealOfTheDayPresenter implements NetworkCallback, IMealOfTheDayPres
     }
 
     @Override
-    public void getMealOfTheDay(NetworkCallback networkCallback) {
+    public void getMealOfTheDay() {
         apiClient.getMealOfTheDay(this);
     }
 }

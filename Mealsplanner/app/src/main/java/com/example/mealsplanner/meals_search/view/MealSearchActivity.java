@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mealsplanner.R;
 import com.example.mealsplanner.meals_search.presenter.MealSearchPresenter;
 import com.example.mealsplanner.model.MealDTO;
-import com.example.mealsplanner.model.MealLocalDataSource;
+import com.example.mealsplanner.db.MealLocalDataSource;
 import com.example.mealsplanner.network.MealRemoteDataStructure;
 import com.example.mealsplanner.network.NetworkCallback;
 
@@ -49,10 +49,7 @@ public class MealSearchActivity extends AppCompatActivity implements IMealSearch
 
         /*presenter creation by passing the Activity object (which implement the interface) to a reference of interface(Activity interface)*/
         mealSearchPresenter = new MealSearchPresenter(APIClient,this);
-        nc = mealSearchPresenter;  // Assign the presenter as the callback
-
-        /*make network call*/
-        APIClient.searchMeals("Arrabiata",nc);
+        mealSearchPresenter.searchMeals("Arrabiata");
     }
 
     @Override

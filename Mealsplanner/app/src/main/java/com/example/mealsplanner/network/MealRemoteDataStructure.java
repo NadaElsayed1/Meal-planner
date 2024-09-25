@@ -15,7 +15,7 @@ public class MealRemoteDataStructure {
     private static final String TAG = "MealOfTheDay";
     private static final String BASE_URL = "https://www.themealdb.com/api/json/v1/1/";
     private static MealRemoteDataStructure instance = null;
-//    private MealService mealService;
+    
     private MealService mealService;
 
 
@@ -53,28 +53,6 @@ public class MealRemoteDataStructure {
             }
         });
     }
-
-//    public void getRandomMeals(NetworkCallback networkCallback) {
-//        Call<MealResponse> call = mealService.getMealOfTheDay();
-//        call.enqueue(new Callback<MealResponse>() {
-//            @Override
-//            public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
-//                if (response.isSuccessful() && response.body() != null) {
-//                    List<MealDTO> meals = response.body().getMeals();
-//                    Log.d("API_CALL", "Success: " + response.body().getMeals());
-//                    networkCallback.onSuccessResult(meals);
-//                } else {
-//                    networkCallback.onFailureResult("Response unsuccessful or empty");
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<MealResponse> call, Throwable t) {
-//                networkCallback.onFailureResult(t.getMessage());
-//                Log.e("API_CALL", "Failed: " + t.getMessage());
-//            }
-//        });
-//    }
 
     public void getMealsByCategory(String category, NetworkCallback networkCallback) {
         Call<MealResponse> call = mealService.getMealsByCategory(category);
@@ -135,6 +113,4 @@ public class MealRemoteDataStructure {
             }
         });
     }
-
-
 }

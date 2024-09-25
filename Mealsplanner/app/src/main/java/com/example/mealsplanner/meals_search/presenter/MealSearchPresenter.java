@@ -2,7 +2,6 @@ package com.example.mealsplanner.meals_search.presenter;
 
 import com.example.mealsplanner.meals_search.view.IMealSearchActivity;
 import com.example.mealsplanner.model.MealDTO;
-import com.example.mealsplanner.model.MealLocalDataSource;
 import com.example.mealsplanner.network.MealRemoteDataStructure;
 import com.example.mealsplanner.network.NetworkCallback;
 
@@ -29,7 +28,7 @@ public class MealSearchPresenter implements IMealSearchPresenter , NetworkCallba
     }
 
     @Override
-    public void searchMeals(String query, NetworkCallback networkCallback) {
-        apiClient.searchMeals(query, this);
+    public void searchMeals(String query) {
+        apiClient.searchMeals(query,this);
     }
 }
