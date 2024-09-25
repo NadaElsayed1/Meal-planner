@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        Intent intent = new Intent(MainActivity.this, MealSearchActivity.class);
+        Intent intent = new Intent(MainActivity.this, MealOfTheDayActivity.class);
         startActivity(intent);
     }
 }

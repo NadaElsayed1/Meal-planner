@@ -51,7 +51,7 @@ public class MealOfTheDayActivity extends AppCompatActivity implements IMealOfTh
         repo = MealLocalDataSource.getInstance(this.getApplicationContext());
 
         /*presenter creation by passing the Activity object (which implement the interface) to a reference of interface(Activity interface)*/
-        mealOfTheDayPresenter = new MealOfTheDayPresenter(repo,this);
+        mealOfTheDayPresenter = new MealOfTheDayPresenter(APIClient,this);
 //        allProductpresenter.presenter();  // Correctly pass the view and repo
         nc = mealOfTheDayPresenter;  // Assign the presenter as the callback
 

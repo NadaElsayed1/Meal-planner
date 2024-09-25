@@ -9,11 +9,11 @@ import java.util.List;
 
 public class MealByCategoryPresenter implements IMealByCategoryPresenter , NetworkCallback {
 
-    private MealLocalDataSource repo;
+    private MealRemoteDataStructure apiClient;
     private IMealByCategoryActivity view;
 
-    public MealByCategoryPresenter(MealLocalDataSource repo, IMealByCategoryActivity view) {
-        this.repo = repo;
+    public MealByCategoryPresenter(MealRemoteDataStructure apiClient, IMealByCategoryActivity view) {
+        this.apiClient = apiClient;
         this.view = view;
     }
 
@@ -25,5 +25,10 @@ public class MealByCategoryPresenter implements IMealByCategoryPresenter , Netwo
     @Override
     public void onFailureResult(String errorMsg) {
         view.showErrMsg(errorMsg);
+    }
+
+    @Override
+    public void getMealsByCategory(String category, NetworkCallback networkCallback) {
+        apiClient.getMealsByCategory(category,this);
     }
 }

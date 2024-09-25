@@ -3,16 +3,17 @@ package com.example.mealsplanner.meal_of_the_day.presenter;
 import com.example.mealsplanner.meal_of_the_day.view.IMealOfTheDayActivity;
 import com.example.mealsplanner.model.MealDTO;
 import com.example.mealsplanner.model.MealLocalDataSource;
+import com.example.mealsplanner.network.MealRemoteDataStructure;
 import com.example.mealsplanner.network.NetworkCallback;
 
 import java.util.List;
 
 public class MealOfTheDayPresenter implements NetworkCallback, IMealOfTheDayPresenter {
-    private MealLocalDataSource repository;
+    private MealRemoteDataStructure apiClient;
     private IMealOfTheDayActivity view;
 
-    public MealOfTheDayPresenter(MealLocalDataSource repository, IMealOfTheDayActivity view) {
-        this.repository = repository;
+    public MealOfTheDayPresenter(MealRemoteDataStructure apiClient, IMealOfTheDayActivity view) {
+        this.apiClient = apiClient;
         this.view = view;
     }
 
@@ -24,5 +25,10 @@ public class MealOfTheDayPresenter implements NetworkCallback, IMealOfTheDayPres
     @Override
     public void onFailureResult(String errorMsg) {
         view.showErrMsg(errorMsg);
+    }
+
+    @Override
+    public void getMealOfTheDay(NetworkCallback networkCallback) {
+        apiClient.getMealOfTheDay(this);
     }
 }

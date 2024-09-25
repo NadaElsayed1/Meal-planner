@@ -56,7 +56,7 @@ public class MealByCountryActivity extends AppCompatActivity implements IMealByC
         repo = MealLocalDataSource.getInstance(this.getApplicationContext());
 
         /*presenter creation by passing the Activity object (which implement the interface) to a reference of interface(Activity interface)*/
-        mealByCountryPresenter = new MealByCountryPresenter(repo,this);
+        mealByCountryPresenter = new MealByCountryPresenter(APIClient,this);
         nc = mealByCountryPresenter;  // Assign the presenter as the callback
 
         /*make network call*/

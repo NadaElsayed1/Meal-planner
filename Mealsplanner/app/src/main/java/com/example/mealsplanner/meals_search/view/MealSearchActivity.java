@@ -48,7 +48,7 @@ public class MealSearchActivity extends AppCompatActivity implements IMealSearch
         repo = MealLocalDataSource.getInstance(this.getApplicationContext());
 
         /*presenter creation by passing the Activity object (which implement the interface) to a reference of interface(Activity interface)*/
-        mealSearchPresenter = new MealSearchPresenter(repo,this);
+        mealSearchPresenter = new MealSearchPresenter(APIClient,this);
         nc = mealSearchPresenter;  // Assign the presenter as the callback
 
         /*make network call*/

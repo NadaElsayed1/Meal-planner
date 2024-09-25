@@ -54,7 +54,7 @@ public class MealByCategoryActivity extends AppCompatActivity implements IMealBy
         repo = MealLocalDataSource.getInstance(this.getApplicationContext());
 
         /*presenter creation by passing the Activity object (which implement the interface) to a reference of interface(Activity interface)*/
-        mealByCategoryPresenter = new MealByCategoryPresenter(repo,this);
+        mealByCategoryPresenter = new MealByCategoryPresenter(APIClient,this);
         nc = mealByCategoryPresenter;  // Assign the presenter as the callback
 
         /*make network call*/
