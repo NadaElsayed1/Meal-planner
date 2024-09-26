@@ -11,8 +11,11 @@
         android:id="@+id/search_meal_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:fontFamily="monospace"
+        android:textSize="20sp"
+        android:textColor="@color/darkGreen"
         android:textStyle="bold"/>
+    <!--        android:textColor="@color/orrange"-->
 
     <ImageView
         android:id="@+id/search_meal_image"
@@ -25,5 +28,6 @@
         android:id="@+id/search_meal_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14sp"/>
+        android:textColor="@color/darkGreen"
+        android:textSize="18sp"/>
 </LinearLayout>

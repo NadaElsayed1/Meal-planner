@@ -34,14 +34,15 @@ public class MealRemoteDataStructure {
         return instance;
     }
 
-    public void fetchMealsData(Call<MealResponse> call, NetworkCallback networkCallback) {
+    public void getMealOfTheDay(NetworkCallback networkCallback) {
+        Call<MealResponse> call = mealService.getMealOfTheDay();
         call.enqueue(new Callback<MealResponse>() {
             @Override
             public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<MealDTO> meals = response.body().getMeals();
                     networkCallback.onSuccessResult(meals);
-                    Log.d("API_CALL", "Success: " + meals);
+                    Log.d("API_CALL", "Success: " + response.body().getMeals());
                 }
             }
 
@@ -52,103 +53,103 @@ public class MealRemoteDataStructure {
             }
         });
     }
-    public void getMealOfTheDay(NetworkCallback networkCallback) {
-        Call<MealResponse> call = mealService.getMealOfTheDay();
-        fetchMealsData(call, networkCallback);
-    }
 
     public void getMealsByCategory(String category, NetworkCallback networkCallback) {
         Call<MealResponse> call = mealService.getMealsByCategory(category);
-        fetchMealsData(call, networkCallback);
+        call.enqueue(new Callback<MealResponse>() {
+            @Override
+            public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<MealDTO> meals = response.body().getMeals();
+                    networkCallback.onSuccessResult(meals);
+                    Log.d("API_CALL", "Success: " + response.body().getMeals());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MealResponse> call, Throwable t) {
+                networkCallback.onFailureResult(t.getMessage());
+                Log.e("API_CALL", "Failed: " + t.getMessage());
+            }
+        });
     }
 
     public void getMealsByCountry(String country, NetworkCallback networkCallback) {
         Call<MealResponse> call = mealService.getMealsByCountry(country);
-        fetchMealsData(call, networkCallback);
+        call.enqueue(new Callback<MealResponse>() {
+            @Override
+            public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<MealDTO> meals = response.body().getMeals();
+                    networkCallback.onSuccessResult(meals);
+                    Log.d("API_CALL", "Success: " + response.body().getMeals());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MealResponse> call, Throwable t) {
+                networkCallback.onFailureResult(t.getMessage());
+                Log.e("API_CALL", "Failed: " + t.getMessage());
+            }
+        });
     }
 
     public void searchMeals(String searchQuery, NetworkCallback networkCallback) {
         Call<MealResponse> call = mealService.searchMeals(searchQuery);
-        fetchMealsData(call, networkCallback);
+        call.enqueue(new Callback<MealResponse>() {
+            @Override
+            public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<MealDTO> meals = response.body().getMeals();
+                    networkCallback.onSuccessResult(meals);
+                    Log.d("API_CALL", "Success: " + response.body().getMeals());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MealResponse> call, Throwable t) {
+                networkCallback.onFailureResult(t.getMessage());
+                Log.e("API_CALL", "Failed: " + t.getMessage());
+            }
+        });
     }
 
-//    public void getMealOfTheDay(NetworkCallback networkCallback) {
-//        Call<MealResponse> call = mealService.getMealOfTheDay();
+
+//    public void fetchMealsData(Call<MealResponse> call, NetworkCallback networkCallback) {
 //        call.enqueue(new Callback<MealResponse>() {
 //            @Override
 //            public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
 //                if (response.isSuccessful() && response.body() != null) {
 //                    List<MealDTO> meals = response.body().getMeals();
 //                    networkCallback.onSuccessResult(meals);
-//                    Log.d("API_CALL", "Success: " + response.body().getMeals());
+//                    Log.d("API_CALL", "Success: " + meals);
 //                }
 //            }
 //
 //            @Override
 //            public void onFailure(Call<MealResponse> call, Throwable t) {
 //                networkCallback.onFailureResult(t.getMessage());
-//                            Log.e("API_CALL", "Failed: " + t.getMessage());
+//                Log.e("API_CALL", "Failed: " + t.getMessage());
 //            }
 //        });
+//    }
+//    public void getMealOfTheDay(NetworkCallback networkCallback) {
+//        Call<MealResponse> call = mealService.getMealOfTheDay();
+//        fetchMealsData(call, networkCallback);
 //    }
 //
 //    public void getMealsByCategory(String category, NetworkCallback networkCallback) {
 //        Call<MealResponse> call = mealService.getMealsByCategory(category);
-//        call.enqueue(new Callback<MealResponse>() {
-//            @Override
-//            public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
-//                if (response.isSuccessful() && response.body() != null) {
-//                    List<MealDTO> meals = response.body().getMeals();
-//                    networkCallback.onSuccessResult(meals);
-//                    Log.d("API_CALL", "Success: " + response.body().getMeals());
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<MealResponse> call, Throwable t) {
-//                networkCallback.onFailureResult(t.getMessage());
-//                        Log.e("API_CALL", "Failed: " + t.getMessage());
-//            }
-//        });
+//        fetchMealsData(call, networkCallback);
 //    }
 //
 //    public void getMealsByCountry(String country, NetworkCallback networkCallback) {
 //        Call<MealResponse> call = mealService.getMealsByCountry(country);
-//        call.enqueue(new Callback<MealResponse>() {
-//            @Override
-//            public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
-//                if (response.isSuccessful() && response.body() != null) {
-//                    List<MealDTO> meals = response.body().getMeals();
-//                    networkCallback.onSuccessResult(meals);
-//                    Log.d("API_CALL", "Success: " + response.body().getMeals());
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<MealResponse> call, Throwable t) {
-//                networkCallback.onFailureResult(t.getMessage());
-//                Log.e("API_CALL", "Failed: " + t.getMessage());
-//                }
-//        });
+//        fetchMealsData(call, networkCallback);
 //    }
 //
 //    public void searchMeals(String searchQuery, NetworkCallback networkCallback) {
 //        Call<MealResponse> call = mealService.searchMeals(searchQuery);
-//        call.enqueue(new Callback<MealResponse>() {
-//            @Override
-//            public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
-//                if (response.isSuccessful() && response.body() != null) {
-//                    List<MealDTO> meals = response.body().getMeals();
-//                    networkCallback.onSuccessResult(meals);
-//                    Log.d("API_CALL", "Success: " + response.body().getMeals());
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<MealResponse> call, Throwable t) {
-//                networkCallback.onFailureResult(t.getMessage());
-//                Log.e("API_CALL", "Failed: " + t.getMessage());
-//            }
-//        });
+//        fetchMealsData(call, networkCallback);
 //    }
 }

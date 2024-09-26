@@ -11,7 +11,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Search Meals"
+        android:fontFamily="monospace"
         android:textSize="24sp"
+        android:textColor="@color/darkGreen"
         android:textStyle="bold"/>
 
     <androidx.recyclerview.widget.RecyclerView

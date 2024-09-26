@@ -10,9 +10,11 @@
         android:id="@+id/meals_by_country_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="monospace"
         android:text="Meals by Country"
+        android:textColor="@color/darkGreen"
         android:textSize="24sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/CountryRecyclerView"

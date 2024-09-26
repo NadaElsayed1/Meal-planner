@@ -11,7 +11,9 @@
         android:id="@+id/category_meal_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:fontFamily="monospace"
+        android:textColor="@color/darkGreen"
+        android:textSize="20sp"
         android:textStyle="bold"/>
 
     <ImageView
@@ -25,5 +27,6 @@
         android:id="@+id/category_meal_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14sp"/>
+        android:textColor="@color/darkGreen"
+        android:textSize="18sp"/>
 </LinearLayout>
