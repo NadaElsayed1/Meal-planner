@@ -1,6 +1,6 @@
 package com.example.mealsplanner.meals_search.presenter;
 
-import com.example.mealsplanner.meals_search.view.IMealSearchActivity;
+import com.example.mealsplanner.meals_search.view.IMealSearchView;
 import com.example.mealsplanner.model.MealDTO;
 import com.example.mealsplanner.network.MealRemoteDataStructure;
 import com.example.mealsplanner.network.NetworkCallback;
@@ -10,9 +10,9 @@ import java.util.List;
 public class MealSearchPresenter implements IMealSearchPresenter , NetworkCallback {
 
     private MealRemoteDataStructure apiClient;
-    private IMealSearchActivity view;
+    private IMealSearchView view;
 
-    public MealSearchPresenter(MealRemoteDataStructure apiClient, IMealSearchActivity view) {
+    public MealSearchPresenter(MealRemoteDataStructure apiClient, IMealSearchView view) {
         this.apiClient = apiClient;
         this.view = view;
     }

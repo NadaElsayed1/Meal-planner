@@ -45,7 +45,8 @@ public class MealOfTheDayAdapter extends RecyclerView.Adapter<MealOfTheDayAdapte
     @Override
     public void onBindViewHolder(@NonNull MealOfTheDayAdapter.ViewHolder holder, int position) {
         MealDTO mealDTO = meals.get(position);
-        holder.textView.setText(mealDTO.getStrMeal());
+        holder.title.setText(mealDTO.getStrMeal());
+        holder.description.setText(mealDTO.getStrInstructions());
         Glide.with(context)
                 .load(mealDTO.getStrMealThumb())
                 .into(holder.imageView);
@@ -60,15 +61,15 @@ public class MealOfTheDayAdapter extends RecyclerView.Adapter<MealOfTheDayAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView imageView;
-        private TextView textView;
+        private TextView title;
+        private TextView description;
         public ConstraintLayout constraintLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.imageView);
-            textView = itemView.findViewById(R.id.cattxtView);
-
-
+            imageView = itemView.findViewById(R.id.item_meal_image);
+            title = itemView.findViewById(R.id.item_meal_title);
+            description = itemView.findViewById(R.id.item_meal_description);
         }
     }
 }

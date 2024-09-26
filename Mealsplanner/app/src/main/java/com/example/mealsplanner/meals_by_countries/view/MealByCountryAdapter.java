@@ -47,6 +47,7 @@ public class MealByCountryAdapter extends RecyclerView.Adapter<MealByCountryAdap
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MealDTO mealDTO = meals.get(position);
         holder.mealNameTextView.setText(mealDTO.getStrMeal());
+        holder.mealDescription.setText(mealDTO.getStrInstructions());
         Glide.with(context)
                 .load(mealDTO.getStrMealThumb())
                 .into(holder.mealImageView);
@@ -63,11 +64,13 @@ public class MealByCountryAdapter extends RecyclerView.Adapter<MealByCountryAdap
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView mealNameTextView;
         private ImageView mealImageView;
+        private TextView mealDescription;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            mealNameTextView = itemView.findViewById(R.id.countxtView);
-            mealImageView = itemView.findViewById(R.id.counimgView);
+            mealNameTextView = itemView.findViewById(R.id.country_meal_title);
+            mealImageView = itemView.findViewById(R.id.country_meal_image);
+            mealDescription = itemView.findViewById(R.id.country_meal_description);
         }
     }
 }

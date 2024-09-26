@@ -1,6 +1,6 @@
 package com.example.mealsplanner.meals_by_countries.presenter;
 
-import com.example.mealsplanner.meals_by_countries.view.IMealByCountryActivity;
+import com.example.mealsplanner.meals_by_countries.view.IMealByCountryView;
 import com.example.mealsplanner.model.MealDTO;
 import com.example.mealsplanner.network.MealRemoteDataStructure;
 import com.example.mealsplanner.network.NetworkCallback;
@@ -10,9 +10,9 @@ import java.util.List;
 public class MealByCountryPresenter implements IMealByCountryPresenter, NetworkCallback {
 
     private MealRemoteDataStructure apiClient;
-    private IMealByCountryActivity view;
+    private IMealByCountryView view;
 
-    public MealByCountryPresenter(MealRemoteDataStructure apiClient, IMealByCountryActivity view) {
+    public MealByCountryPresenter(MealRemoteDataStructure apiClient, IMealByCountryView view) {
         this.apiClient = apiClient;
         this.view = view;
     }

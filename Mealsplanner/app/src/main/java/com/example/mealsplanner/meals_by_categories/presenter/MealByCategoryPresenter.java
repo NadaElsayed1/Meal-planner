@@ -1,6 +1,6 @@
 package com.example.mealsplanner.meals_by_categories.presenter;
 
-import com.example.mealsplanner.meals_by_categories.view.IMealByCategoryActivity;
+import com.example.mealsplanner.meals_by_categories.view.IMealByCategoryView;
 import com.example.mealsplanner.model.MealDTO;
 import com.example.mealsplanner.network.MealRemoteDataStructure;
 import com.example.mealsplanner.network.NetworkCallback;
@@ -9,9 +9,9 @@ import java.util.List;
 public class MealByCategoryPresenter implements IMealByCategoryPresenter , NetworkCallback {
 
     private MealRemoteDataStructure apiClient;
-    private IMealByCategoryActivity view;
+    private IMealByCategoryView view;
 
-    public MealByCategoryPresenter(MealRemoteDataStructure apiClient, IMealByCategoryActivity view) {
+    public MealByCategoryPresenter(MealRemoteDataStructure apiClient, IMealByCategoryView view) {
         this.apiClient = apiClient;
         this.view = view;
     }

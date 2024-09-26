@@ -8,21 +8,21 @@
     android:background="?android:attr/selectableItemBackground">
 
     <TextView
-        android:id="@+id/item_meal_title"
+        android:id="@+id/search_meal_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:textStyle="bold"/>
 
     <ImageView
-        android:id="@+id/item_meal_image"
+        android:id="@+id/search_meal_image"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:scaleType="centerCrop"
         android:contentDescription=""/>
 
     <TextView
-        android:id="@+id/item_meal_description"
+        android:id="@+id/search_meal_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14sp"/>

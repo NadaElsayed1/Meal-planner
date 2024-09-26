@@ -48,6 +48,7 @@ public class MealByCategoryAdapter extends RecyclerView.Adapter<MealByCategoryAd
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MealDTO mealDTO = meals.get(position);
         holder.mealNameTextView.setText(mealDTO.getStrMeal());
+        holder.mealDesription.setText(mealDTO.getStrInstructions());
          Glide.with(context)
                  .load(mealDTO.getStrMealThumb())
                  .into(holder.mealImageView);
@@ -65,11 +66,13 @@ public class MealByCategoryAdapter extends RecyclerView.Adapter<MealByCategoryAd
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView mealNameTextView;
         private  ImageView mealImageView;
+        private TextView mealDesription;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            mealNameTextView = itemView.findViewById(R.id.cattxtView);
-            mealImageView = itemView.findViewById(R.id.catimgView);
+            mealNameTextView = itemView.findViewById(R.id.category_meal_title);
+            mealImageView = itemView.findViewById(R.id.category_meal_image);
+            mealDesription = itemView.findViewById(R.id.category_meal_description);
         }
     }
 }

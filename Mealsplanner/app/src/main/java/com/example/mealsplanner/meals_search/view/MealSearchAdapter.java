@@ -42,7 +42,7 @@ public class MealSearchAdapter extends RecyclerView.Adapter<MealSearchAdapter.Vi
     @NonNull
     @Override
     public MealSearchAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.country_row, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.search_row, parent, false);
         return new MealSearchAdapter.ViewHolder(view);
     }
 
@@ -50,6 +50,7 @@ public class MealSearchAdapter extends RecyclerView.Adapter<MealSearchAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MealDTO mealDTO = meals.get(position);
         holder.mealNameTextView.setText(mealDTO.getStrMeal());
+        holder.mealDescription.setText(mealDTO.getStrInstructions());
         Glide.with(context)
                 .load(mealDTO.getStrMealThumb())
                 .into(holder.mealImageView);
@@ -66,11 +67,13 @@ public class MealSearchAdapter extends RecyclerView.Adapter<MealSearchAdapter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView mealNameTextView;
         private ImageView mealImageView;
+        private TextView mealDescription;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            mealNameTextView = itemView.findViewById(R.id.countxtView);
-            mealImageView = itemView.findViewById(R.id.counimgView);
+            mealNameTextView = itemView.findViewById(R.id.search_meal_title);
+            mealImageView = itemView.findViewById(R.id.search_meal_image);
+            mealDescription = itemView.findViewById(R.id.search_meal_description);
         }
     }
 }
