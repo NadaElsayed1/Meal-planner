@@ -8,7 +8,7 @@ import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import android.view.View;
 import com.bumptech.glide.Glide;
 import com.example.mealsplanner.R;
 import com.example.mealsplanner.db.MealLocalDataSource;
@@ -23,15 +23,16 @@ import java.util.Calendar;
 
 public class MealDetailsActivity extends AppCompatActivity implements SelectMealClickListener {
 
-    private TextView mealName2, mealDescription2, mealCategory2, mealCountry2;
-    private ImageView mealImage2, addToPlanButton;
-    private WebView mealVideo2;
-    private Button addToFavBtn2;
+    private TextView mealName, mealDescription, mealCategory, mealCountry;
+    private ImageView mealImage, addToPlanButton;
+    private WebView mealVideo;
+    private Button addToFavBtn;
     private Spinner mealTypeSpinner;
-    private MealDetailsPresenter mealDetailsPresenter2;
-    private MealLocalDataSource repo2;
+    private MealDetailsPresenter mealDetailsPresenter;
+    private MealLocalDataSource repo;
     private MealPlannerLocalDataSource plannerRepo;
-    private MealDTO currentMealDTO2;
+    private MealDTO currentMealDTO;
+    private MealPlannerDTO currentMealPlannedDTO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,14 +40,14 @@ public class MealDetailsActivity extends AppCompatActivity implements SelectMeal
         setContentView(R.layout.activity_meal_details);
 
         initUI();
-        repo2 = MealLocalDataSource.getInstance(getApplicationContext());
+        repo = MealLocalDataSource.getInstance(getApplicationContext());
         plannerRepo = MealPlannerLocalDataSource.getInstance(getApplicationContext());
 
         getMealDetailsFromIntent();
 
-        addToFavBtn2.setOnClickListener(v -> {
-            if (currentMealDTO2 != null) {
-                OnSelect(currentMealDTO2);
+        addToFavBtn.setOnClickListener(v -> {
+            if (currentMealDTO != null) {
+                OnSelect(currentMealDTO);
             }
         });
 
@@ -55,13 +56,13 @@ public class MealDetailsActivity extends AppCompatActivity implements SelectMeal
     }
 
     private void initUI() {
-        mealName2 = findViewById(R.id.meal_name2);
-        mealImage2 = findViewById(R.id.meal_image2);
-        mealDescription2 = findViewById(R.id.item_meal_description2);
-        mealCategory2 = findViewById(R.id.item_meal_category2);
-        mealCountry2 = findViewById(R.id.item_meal_country2);
-        mealVideo2 = findViewById(R.id.item_meal_video2);
-        addToFavBtn2 = findViewById(R.id.add_to_fav_btn2);
+        mealName = findViewById(R.id.meal_name2);
+        mealImage = findViewById(R.id.meal_image2);
+        mealDescription = findViewById(R.id.item_meal_description2);
+        mealCategory = findViewById(R.id.item_meal_category2);
+        mealCountry = findViewById(R.id.item_meal_country2);
+        mealVideo = findViewById(R.id.item_meal_video2);
+        addToFavBtn = findViewById(R.id.add_to_fav_btn2);
         mealTypeSpinner = findViewById(R.id.meal_type_spinner);
         addToPlanButton = findViewById(R.id.add_to_plan_button);
     }
@@ -71,33 +72,28 @@ public class MealDetailsActivity extends AppCompatActivity implements SelectMeal
         MealDTO mealDTOCategory = (MealDTO) getIntent().getSerializableExtra("MealCategoryDetails");
         MealDTO mealDTORandom = (MealDTO) getIntent().getSerializableExtra("MealOftheDay");
         MealDTO mealDTOSearch = (MealDTO) getIntent().getSerializableExtra("MealSearch");
-        MealDTO mealDTOPlanned = (MealDTO) getIntent().getSerializableExtra("plannedMeal");
+        MealPlannerDTO mealDTOPlanned = (MealPlannerDTO) getIntent().getSerializableExtra("plannedMeal");
 
-
-        mealDetailsPresenter2 = new MealDetailsPresenter(MealRemoteDataStructure.getInstance(), this);
+        mealDetailsPresenter = new MealDetailsPresenter(MealRemoteDataStructure.getInstance(), this);
 
         if (mealDTOCountry != null) {
-            mealDetailsPresenter2.lookupMealById(mealDTOCountry.getIdMeal());
-            currentMealDTO2 = mealDTOCountry;
+            mealDetailsPresenter.lookupMealById(mealDTOCountry.getIdMeal());
+            currentMealDTO = mealDTOCountry;
         } else if (mealDTOCategory != null) {
-            mealDetailsPresenter2.lookupMealById(mealDTOCategory.getIdMeal());
-            currentMealDTO2 = mealDTOCategory;
-        } else if (mealDTORandom != null)
-        {
-            mealDetailsPresenter2.lookupMealById(mealDTORandom.getIdMeal());
-            currentMealDTO2 = mealDTORandom;
-        }
-        else if (mealDTOSearch != null)
-        {
-            mealDetailsPresenter2.lookupMealById(mealDTOSearch.getIdMeal());
-            currentMealDTO2 = mealDTOSearch;
-        }
-        else if (mealDTOPlanned != null)
-        {
-            mealDetailsPresenter2.lookupMealById(mealDTOPlanned.getIdMeal());
-            currentMealDTO2 = mealDTOPlanned;
-        }
-        else {
+            mealDetailsPresenter.lookupMealById(mealDTOCategory.getIdMeal());
+            currentMealDTO = mealDTOCategory;
+        } else if (mealDTORandom != null) {
+            mealDetailsPresenter.lookupMealById(mealDTORandom.getIdMeal());
+            currentMealDTO = mealDTORandom;
+        } else if (mealDTOSearch != null) {
+            mealDetailsPresenter.lookupMealById(mealDTOSearch.getIdMeal());
+            currentMealDTO = mealDTOSearch;
+        } else if (mealDTOPlanned != null) {
+            mealDetailsPresenter.lookupMealById(mealDTOPlanned.getIdMeal());
+            // Make the calendar and spinner invisible
+            addToPlanButton.setVisibility(View.GONE);
+            mealTypeSpinner.setVisibility(View.GONE);
+        } else {
             Log.e("MealDetailsActivity", "No MealDTO found in the intent");
             finish();
         }
@@ -130,54 +126,78 @@ public class MealDetailsActivity extends AppCompatActivity implements SelectMeal
     }
 
     private void addMealToPlan(String mealType, String selectedDate) {
-        if (currentMealDTO2 != null) {
-            MealPlannerDTO mealPlanner = new MealPlannerDTO(currentMealDTO2, selectedDate, mealType);
-            mealPlanner.setIdMeal(currentMealDTO2.getIdMeal());
+        if (currentMealDTO != null) {
+            MealPlannerDTO mealPlanner = new MealPlannerDTO(currentMealDTO, selectedDate, mealType);
+            mealPlanner.setIdMeal(currentMealDTO.getIdMeal());
             mealPlanner.setMealType(mealType);
             mealPlanner.setDate(selectedDate);
             plannerRepo.insertMealPlanned(mealPlanner);
-            Toast.makeText(this, "Meal added to plan: " + currentMealDTO2.getStrMeal(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Meal added to plan: " + currentMealDTO.getStrMeal(), Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "Error: No meal selected!", Toast.LENGTH_SHORT).show();
         }
     }
 
     public void updateMealDetails(MealDTO mealDTO) {
-        currentMealDTO2 = mealDTO;
-        mealName2.setText(mealDTO.getStrMeal());
-        mealDescription2.setText(mealDTO.getStrInstructions());
-        mealCategory2.setText(mealDTO.getStrCategory());
-        mealCountry2.setText(mealDTO.getStrArea());
+        currentMealDTO = mealDTO;
+        mealName.setText(mealDTO.getStrMeal());
+        mealDescription.setText(mealDTO.getStrInstructions());
+        mealCategory.setText(mealDTO.getStrCategory());
+        mealCountry.setText(mealDTO.getStrArea());
 
         Glide.with(this)
                 .load(mealDTO.getStrMealThumb())
-                .into(mealImage2);
+                .into(mealImage);
 
-        // Set up RecyclerView for ingredients
         RecyclerView ingredientsRecyclerView = findViewById(R.id.ingredients_recycler_view);
         ingredientsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         IngredientAdapter ingredientAdapter = new IngredientAdapter(this, mealDTO.getIngredients(), mealDTO.getMeasures());
         ingredientsRecyclerView.setAdapter(ingredientAdapter);
 
-        // Load the YouTube video if available
         String youtubeUrl = mealDTO.getStrYoutube();
         if (youtubeUrl != null && !youtubeUrl.isEmpty()) {
             String videoId = youtubeUrl.substring(youtubeUrl.lastIndexOf('=') + 1);
             String iframeHtml = "<html><body><iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/" + videoId + "\" frameborder=\"0\" allowfullscreen></iframe></body></html>";
-            mealVideo2.getSettings().setJavaScriptEnabled(true);
-            mealVideo2.loadData(iframeHtml, "text/html", "utf-8");
+            mealVideo.getSettings().setJavaScriptEnabled(true);
+            mealVideo.loadData(iframeHtml, "text/html", "utf-8");
+        }
+    }
+
+    public void updateMealDetails(MealPlannerDTO mealPlannerDTO) {
+        currentMealPlannedDTO = mealPlannerDTO;
+        mealName.setText(mealPlannerDTO.getStrMeal());
+        mealDescription.setText(mealPlannerDTO.getStrInstructions());
+        mealCategory.setText(mealPlannerDTO.getStrCategory());
+        mealCountry.setText(mealPlannerDTO.getStrArea());
+
+        Glide.with(this)
+                .load(mealPlannerDTO.getStrMealThumb())
+                .into(mealImage);
+
+        RecyclerView ingredientsRecyclerView = findViewById(R.id.ingredients_recycler_view);
+        ingredientsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        IngredientAdapter ingredientAdapter = new IngredientAdapter(this, mealPlannerDTO.getIngredients(), mealPlannerDTO.getMeasures());
+        ingredientsRecyclerView.setAdapter(ingredientAdapter);
+
+        String youtubeUrl = mealPlannerDTO.getStrYoutube();
+        if (youtubeUrl != null && !youtubeUrl.isEmpty()) {
+            String videoId = youtubeUrl.substring(youtubeUrl.lastIndexOf('=') + 1);
+            String iframeHtml = "<html><body><iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/" + videoId + "\" frameborder=\"0\" allowfullscreen></iframe></body></html>";
+            mealVideo.getSettings().setJavaScriptEnabled(true);
+            mealVideo.loadData(iframeHtml, "text/html", "utf-8");
         }
     }
 
     @Override
     public void OnSelect(MealDTO mealDTO) {
         try {
-            repo2.insert(mealDTO);
+            repo.insert(mealDTO);
             Toast.makeText(this, "Added to favorites: " + mealDTO.getStrMeal(), Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
+            Toast.makeText(this, "Error adding to favorites!", Toast.LENGTH_SHORT).show();
             Log.e("MealDetailsActivity", "Error adding to favorites", e);
-            Toast.makeText(this, "Failed to add to favorites", Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -4,8 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+import java.util.List;
+
 @Entity(tableName = "meal_planner")
-public class MealPlannerDTO {
+public class MealPlannerDTO implements Serializable {
+
+//    private MealDTO mealDTO;
+
     @PrimaryKey
     @NonNull
     private String idMeal;
@@ -70,6 +76,17 @@ public class MealPlannerDTO {
     private String strImageSource;
     private String strCreativeCommonsConfirmed;
     private String dateModified;
+    private List<String> ingredients;
+
+    public void setIngredients(List<String> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public void setMeasures(List<String> measures) {
+        this.measures = measures;
+    }
+
+    private List<String> measures;
 
     public MealPlannerDTO(MealDTO mealDTO, String date, String mealType) {
         this.idMeal = mealDTO.getIdMeal();
@@ -123,6 +140,64 @@ public class MealPlannerDTO {
         this.strMeasure18 = mealDTO.getStrMeasure18();
         this.strMeasure19 = mealDTO.getStrMeasure19();
         this.strMeasure20 = mealDTO.getStrMeasure20();
+        this.ingredients = List.of(
+                mealDTO.getStrIngredient1(),
+                mealDTO.getStrIngredient2(),
+                mealDTO.getStrIngredient3(),
+                mealDTO.getStrIngredient4(),
+                mealDTO.getStrIngredient5(),
+                mealDTO.getStrIngredient6(),
+                mealDTO.getStrIngredient7(),
+                mealDTO.getStrIngredient8(),
+                mealDTO.getStrIngredient9(),
+                mealDTO.getStrIngredient10(),
+                mealDTO.getStrIngredient11(),
+                mealDTO.getStrIngredient12(),
+                mealDTO.getStrIngredient13(),
+                mealDTO.getStrIngredient14(),
+                mealDTO.getStrIngredient15(),
+                mealDTO.getStrIngredient16(),
+                mealDTO.getStrIngredient17(),
+                mealDTO.getStrIngredient18(),
+                mealDTO.getStrIngredient19(),
+                mealDTO.getStrIngredient20()
+        );
+
+        this.measures = List.of(
+                mealDTO.getStrMeasure1(),
+                mealDTO.getStrMeasure2(),
+                mealDTO.getStrMeasure3(),
+                mealDTO.getStrMeasure4(),
+                mealDTO.getStrMeasure5(),
+                mealDTO.getStrMeasure6(),
+                mealDTO.getStrMeasure7(),
+                mealDTO.getStrMeasure8(),
+                mealDTO.getStrMeasure9(),
+                mealDTO.getStrMeasure10(),
+                mealDTO.getStrMeasure11(),
+                mealDTO.getStrMeasure12(),
+                mealDTO.getStrMeasure13(),
+                mealDTO.getStrMeasure14(),
+                mealDTO.getStrMeasure15(),
+                mealDTO.getStrMeasure16(),
+                mealDTO.getStrMeasure17(),
+                mealDTO.getStrMeasure18(),
+                mealDTO.getStrMeasure19(),
+                mealDTO.getStrMeasure20()
+        );
+
+
+    }
+//    public MealDTO getMealDTO() {
+//        return mealDTO;
+//    }
+
+    public List<String> getIngredients() {
+        return ingredients;
+    }
+
+    public List<String> getMeasures() {
+        return measures;
     }
     public String getIdMeal() {
         return idMeal;

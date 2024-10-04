@@ -24,12 +24,14 @@ public class MealPlannerAdapter extends RecyclerView.Adapter<MealPlannerAdapter.
     private List<MealPlannerDTO> mealPlannerList;
     private Context context;
     private DeletPlannedMeal listener;
+    private OnMealClickListener mealClickListener;
 
 
-    public MealPlannerAdapter(Context context, List<MealPlannerDTO> mealPlannerList, DeletPlannedMeal listener) {
+    public MealPlannerAdapter(Context context, List<MealPlannerDTO> mealPlannerList, DeletPlannedMeal listener, OnMealClickListener mealClickListener) {
         this.mealPlannerList = mealPlannerList;
         this.context = context;
         this.listener = listener;
+        this.mealClickListener = mealClickListener;
     }
 
     public void updateMealPlannerList(List<MealPlannerDTO> newMealPlannerList) {
@@ -73,9 +75,19 @@ public class MealPlannerAdapter extends RecyclerView.Adapter<MealPlannerAdapter.
                     .into(holder.plannedMealImage);
             Log.d(TAG, "Meal Image URL: " + mealPlanner.getStrMealThumb());
         } else {
-            // Set a default image or error image when URL is null or empty
             Log.w(TAG, "Image URL is null or empty for meal: " + mealPlanner.getStrMeal());
         }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mealClickListener != null)
+                {
+//                    MealDTO mealDTO = mealPlanner.getMealDTO();
+                    mealClickListener.onMealClick(mealPlanner);
+                }
+            }
+        });
 
         holder.delet.setOnClickListener(new View.OnClickListener() {
             @Override

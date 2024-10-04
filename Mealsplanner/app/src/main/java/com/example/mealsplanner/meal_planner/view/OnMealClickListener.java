@@ -1,6 +1,6 @@
 package com.example.mealsplanner.meal_planner.view;
-import com.example.mealsplanner.model.MealDTO;
+import com.example.mealsplanner.model.MealPlannerDTO;
 
 public interface OnMealClickListener {
-    void onMealClick(MealDTO meal);
+    void onMealClick(MealPlannerDTO meal);
 }

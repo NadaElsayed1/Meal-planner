@@ -21,13 +21,12 @@ public class MealOfTheDayAdapter extends RecyclerView.Adapter<MealOfTheDayAdapte
     public static final String TAG = "HomeAdapter";
     private Context context;
     private ArrayList<MealDTO> meals;
-    private OnMealClickListener mealClickListener;
-
+    private OnMealClickListener listener;
 
     public MealOfTheDayAdapter(Context context, ArrayList<MealDTO> meals, OnMealClickListener listener) {
         this.context = context;
         this.meals = meals;
-        this.mealClickListener = listener;
+        this.listener = listener;
     }
 
     public void setList(List<MealDTO> newMeals) {
@@ -51,8 +50,8 @@ public class MealOfTheDayAdapter extends RecyclerView.Adapter<MealOfTheDayAdapte
                 .load(mealDTO.getStrMealThumb())
                 .into(holder.mealImageView);
         holder.itemView.setOnClickListener(v -> {
-            if (mealClickListener != null) {
-                mealClickListener.onMealClick(mealDTO);
+            if (listener != null) {
+                listener.onMealClick(mealDTO);
             }
         });
     }
