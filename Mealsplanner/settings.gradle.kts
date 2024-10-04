@@ -18,6 +18,13 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+//// settings.gradle.kts
+//pluginManagement {
+//    repositories {
+//        google()
+//        mavenCentral()
+//    }
+//}
 
 rootProject.name = "Meals planner"
 include(":app")

@@ -15,11 +15,24 @@
         android:theme="@style/Theme.MealsPlanner"
         tools:targetApi="31">
         <activity
+            android:name=".detailed_meals.view.MealDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".meals_countries.view.MealCountryDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".meals_categories.view.MealCategoryDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".meal_of_the_day.view.MealDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".SplashActivity"
             android:exported="true"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -41,7 +54,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".meal_of_the_day.view.MealOfTheDayActivity" />
     </application>
 
 </manifest>

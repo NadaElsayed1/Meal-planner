@@ -1,12 +1,10 @@
 package com.example.mealsplanner.model;
-
-import androidx.lifecycle.LiveData;
-
 import com.example.mealsplanner.db.MealLocalDataSource;
+import com.example.mealsplanner.network.CategoryNetworkCallBack;
 import com.example.mealsplanner.network.MealRemoteDataStructure;
 import com.example.mealsplanner.network.NetworkCallback;
 
-import java.util.List;
+import retrofit2.Call;
 
 public class MealRepository implements IMealRepository  {
     private static MealRepository repo = null;
@@ -37,6 +35,7 @@ public class MealRepository implements IMealRepository  {
         mealRemoteDataStructure.getMealsByCategory(category,networkCallback);
     }
 
+
     @Override
     public void getMealsByCountry(String country, NetworkCallback networkCallback) {
         mealRemoteDataStructure.getMealsByCountry(country,networkCallback);
@@ -46,6 +45,29 @@ public class MealRepository implements IMealRepository  {
     public void getMealOfTheDay( NetworkCallback networkCallback) {
         mealRemoteDataStructure.getMealOfTheDay(networkCallback);
 
+    }
+    public void getMealCategories(CategoryNetworkCallBack networkCallback) {
+        mealRemoteDataStructure.getMealCategories(networkCallback);
+    }
+
+    public void getMealCountries(NetworkCallback networkCallback) {
+        mealRemoteDataStructure.getMealCountries(networkCallback);
+    }
+
+    public void getMealIngredients(NetworkCallback networkCallback) {
+        mealRemoteDataStructure.getMealIngredients(networkCallback);
+    }
+
+    public void filterMealsByIngredient(String ingredient, NetworkCallback networkCallback) {
+        mealRemoteDataStructure.filterMealsByIngredient(ingredient,networkCallback);
+    }
+
+    public void getLatestMeals(NetworkCallback networkCallback) {
+        mealRemoteDataStructure.getLatestMeals(networkCallback);
+    }
+
+    public void lookupMealById(String mealId, NetworkCallback networkCallback) {
+        mealRemoteDataStructure.lookupMealById(mealId,networkCallback);
     }
 }
 

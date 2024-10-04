@@ -2,6 +2,7 @@ package com.example.mealsplanner.meals_by_countries.presenter;
 
 import com.example.mealsplanner.meals_by_countries.view.IMealByCountryView;
 import com.example.mealsplanner.model.MealDTO;
+import com.example.mealsplanner.model.MealRepository;
 import com.example.mealsplanner.network.MealRemoteDataStructure;
 import com.example.mealsplanner.network.NetworkCallback;
 
@@ -9,11 +10,11 @@ import java.util.List;
 
 public class MealByCountryPresenter implements IMealByCountryPresenter, NetworkCallback {
 
-    private MealRemoteDataStructure apiClient;
+    private MealRepository mealRepository;
     private IMealByCountryView view;
 
-    public MealByCountryPresenter(MealRemoteDataStructure apiClient, IMealByCountryView view) {
-        this.apiClient = apiClient;
+    public MealByCountryPresenter(MealRepository mealRepository, IMealByCountryView view) {
+        this.mealRepository = mealRepository;
         this.view = view;
     }
 
@@ -29,7 +30,7 @@ public class MealByCountryPresenter implements IMealByCountryPresenter, NetworkC
 
     @Override
     public void getMealsByCountry(String country) {
-        apiClient.searchMeals(country, this);
+        mealRepository.getMealsByCountry(country, this);
 
     }
 }

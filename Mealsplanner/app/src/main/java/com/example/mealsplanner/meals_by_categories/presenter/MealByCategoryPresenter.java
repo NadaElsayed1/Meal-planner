@@ -1,18 +1,21 @@
 package com.example.mealsplanner.meals_by_categories.presenter;
 
 import com.example.mealsplanner.meals_by_categories.view.IMealByCategoryView;
+import com.example.mealsplanner.model.CategoryDTO;
 import com.example.mealsplanner.model.MealDTO;
+import com.example.mealsplanner.model.MealRepository;
+import com.example.mealsplanner.network.CategoryNetworkCallBack;
 import com.example.mealsplanner.network.MealRemoteDataStructure;
 import com.example.mealsplanner.network.NetworkCallback;
 import java.util.List;
 
 public class MealByCategoryPresenter implements IMealByCategoryPresenter , NetworkCallback {
 
-    private MealRemoteDataStructure apiClient;
+    private MealRepository mealRepository;
     private IMealByCategoryView view;
 
-    public MealByCategoryPresenter(MealRemoteDataStructure apiClient, IMealByCategoryView view) {
-        this.apiClient = apiClient;
+    public MealByCategoryPresenter(MealRepository mealRepository, IMealByCategoryView view) {
+        this.mealRepository = mealRepository;
         this.view = view;
     }
 
@@ -28,7 +31,7 @@ public class MealByCategoryPresenter implements IMealByCategoryPresenter , Netwo
 
     @Override
     public void getMealsByCategory(String category) {
-        apiClient.getMealsByCategory(category,this);
+        mealRepository.getMealsByCategory(category,this);
     }
 
 }

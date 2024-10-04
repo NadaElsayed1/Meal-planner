@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.mealsplanner.R;
-import com.example.mealsplanner.meals_by_categories.view.MealByCategoryAdapter;
+import com.example.mealsplanner.meals_countries.view.OnCountryClickListener;
 import com.example.mealsplanner.model.MealDTO;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +20,7 @@ public class MealByCountryAdapter extends RecyclerView.Adapter<MealByCountryAdap
     public static final String TAG = "CountryAdapter";
     private Context context;
     private ArrayList<MealDTO> meals;
+
 
     public MealByCountryAdapter(Context context, ArrayList<MealDTO> meals) {
         this.context = context;
@@ -53,6 +54,7 @@ public class MealByCountryAdapter extends RecyclerView.Adapter<MealByCountryAdap
                 .into(holder.mealImageView);
 
         Log.d("CountryAdapter", "Country loaded: " + mealDTO.getStrMeal());
+
     }
 
 

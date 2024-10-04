@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.mealsplanner.R;
+import com.example.mealsplanner.model.CategoryDTO;
 import com.example.mealsplanner.model.MealDTO;
 
 import java.util.ArrayList;

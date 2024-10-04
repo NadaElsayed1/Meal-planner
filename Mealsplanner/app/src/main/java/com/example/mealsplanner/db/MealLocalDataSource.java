@@ -54,13 +54,3 @@ public class MealLocalDataSource {
         }).start();
     }
 }
-
-
-
-//        public Call<MealResponse> getMealOfTheDay() {
-//            return mealService.getMealOfTheDay();
-//        }
-//
-//        public LiveData<List<MealDTO>> getFavoriteMeals() {
-//            return mealDao.getAllMeals();  // Fetch from Room database
-//        }

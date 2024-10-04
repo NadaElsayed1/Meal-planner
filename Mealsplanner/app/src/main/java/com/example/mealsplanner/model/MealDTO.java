@@ -3,23 +3,27 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity(tableName = "meals_table")
-public class MealDTO {
+public class MealDTO  implements Serializable {
 
     @PrimaryKey
     @NonNull
     private String idMeal;
+    private String idCategory;
+    private String strCategory;
+    private String strCategoryThumb;
     private String strMeal;
     private String strDrinkAlternate;
-    private String strCategory;
     private String strArea;
     private String strInstructions;
     private String strMealThumb;
     private String strTags;
     private String strYoutube;
+    private String strIngredient;
     private String strIngredient1;
     private String strIngredient2;
     private String strIngredient3;
@@ -82,6 +86,14 @@ public class MealDTO {
         this.strDrinkAlternate = strDrinkAlternate;
     }
 
+    public void setStrCategoryThumb(String strCategoryThumb) {
+        this.strCategoryThumb = strCategoryThumb;
+    }
+
+    public String getStrCategoryThumb() {
+        return strCategoryThumb;
+    }
+
     public void setStrCategory(String strCategory) {
         this.strCategory = strCategory;
     }
@@ -101,10 +113,26 @@ public class MealDTO {
     public void setStrTags(String strTags) {
         this.strTags = strTags;
     }
+    public String getIdCategory() {
+        return idCategory;
+    }
+
+    public void setIdCategory(String idCategory) {
+        this.idCategory = idCategory;
+    }
 
     public void setStrYoutube(String strYoutube) {
         this.strYoutube = strYoutube;
     }
+
+    public String getStrIngredient() {
+        return strIngredient;
+    }
+
+    public void setStrIngredient(String strIngredient) {
+        this.strIngredient = strIngredient;
+    }
+
 
     public void setStrIngredient1(String strIngredient1) {
         this.strIngredient1 = strIngredient1;

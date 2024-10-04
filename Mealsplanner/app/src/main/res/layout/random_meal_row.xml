@@ -1,33 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/detailed_meal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="8dp"
-    android:background="?android:attr/selectableItemBackground">
+    android:layout_margin="8dp"
+    android:clickable="true"
+    android:elevation="4dp"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground">
 
-    <TextView
-        android:id="@+id/item_meal_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textColor="@color/darkGreen"
-        android:textStyle="bold"/>
-
-<!--android:textColor="@color/orrange"-->
-
-    <ImageView
-        android:id="@+id/item_meal_image"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:scaleType="centerCrop"
-        android:contentDescription=""/>
-
-    <TextView
-        android:id="@+id/item_meal_description"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/darkGreen"
-        android:textSize="18sp"/>
-</LinearLayout>
+        android:orientation="vertical">
+
+        <!-- Meal Image -->
+        <ImageView
+            android:id="@+id/item_meal_image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop" />
+
+        <!-- Meal Name -->
+        <TextView
+            android:id="@+id/item_meal_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:textColor="@color/darkGreen"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

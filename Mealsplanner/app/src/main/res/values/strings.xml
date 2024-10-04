@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">Meals planner</string>
+    <string name="app_name">Meals Planner</string>
+
+    <string-array name="meal_types">
+        <item>Breakfast</item>
+        <item>Lunch</item>
+        <item>Dinner</item>
+    </string-array>
 </resources>

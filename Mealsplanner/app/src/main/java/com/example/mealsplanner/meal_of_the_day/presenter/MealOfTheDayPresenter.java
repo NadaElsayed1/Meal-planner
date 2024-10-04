@@ -2,17 +2,18 @@ package com.example.mealsplanner.meal_of_the_day.presenter;
 
 import com.example.mealsplanner.meal_of_the_day.view.IMealOfTheDayView;
 import com.example.mealsplanner.model.MealDTO;
+import com.example.mealsplanner.model.MealRepository;
 import com.example.mealsplanner.network.MealRemoteDataStructure;
 import com.example.mealsplanner.network.NetworkCallback;
 
 import java.util.List;
 
 public class MealOfTheDayPresenter implements NetworkCallback, IMealOfTheDayPresenter {
-    private MealRemoteDataStructure apiClient;
+    private MealRepository mealRepository;
     private IMealOfTheDayView view;
 
-    public MealOfTheDayPresenter(MealRemoteDataStructure apiClient, IMealOfTheDayView view) {
-        this.apiClient = apiClient;
+    public MealOfTheDayPresenter(MealRepository mealRepository, IMealOfTheDayView view) {
+        this.mealRepository = mealRepository;
         this.view = view;
     }
 
@@ -28,6 +29,6 @@ public class MealOfTheDayPresenter implements NetworkCallback, IMealOfTheDayPres
 
     @Override
     public void getMealOfTheDay() {
-        apiClient.getMealOfTheDay(this);
+        mealRepository.getMealOfTheDay(this);
     }
 }

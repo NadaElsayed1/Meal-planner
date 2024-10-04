@@ -1,5 +1,6 @@
 package com.example.mealsplanner.meals_by_categories.view;
 
+import com.example.mealsplanner.model.CategoryDTO;
 import com.example.mealsplanner.model.MealDTO;
 
 import java.util.List;
