@@ -14,7 +14,6 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Meal Image -->
         <ImageView
             android:id="@+id/category_meal_image"
             android:layout_width="match_parent"
@@ -22,7 +21,6 @@
             android:contentDescription=""
             android:scaleType="centerCrop" />
 
-        <!-- Meal Name -->
         <TextView
             android:id="@+id/category_meal_title"
             android:layout_width="wrap_content"
@@ -34,7 +32,6 @@
             android:textStyle="bold" />
 
 
-        <!-- Remove from Favorites Button -->
         <Button
             android:id="@+id/removeFavbtn"
             android:layout_width="wrap_content"

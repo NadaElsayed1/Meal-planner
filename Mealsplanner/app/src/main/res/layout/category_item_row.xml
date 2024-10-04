@@ -17,7 +17,6 @@
         android:orientation="vertical"
         android:padding="8dp">
 
-        <!-- Thumbnail Image for Category -->
         <ImageView
             android:id="@+id/imageViewCategoryThumb"
             android:layout_width="80dp"
@@ -26,7 +25,6 @@
             android:contentDescription=""
             android:scaleType="centerCrop" />
 
-        <!-- Category Name -->
         <TextView
             android:id="@+id/textViewCategoryName"
             android:layout_width="wrap_content"

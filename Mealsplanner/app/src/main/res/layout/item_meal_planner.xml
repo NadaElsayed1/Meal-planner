@@ -7,6 +7,16 @@
     android:orientation="vertical"
     android:padding="8dp">
 
+    <ImageView
+        android:id="@+id/planned_meal_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="24dp"
+        android:contentDescription="Meal Image"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/planned_meal_name"
@@ -15,7 +25,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="24dp"
         android:text="Meal Name"
-        app:layout_constraintStart_toEndOf="@+id/planned_meal_image"
+        app:layout_constraintStart_toEndOf="@id/planned_meal_image"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -26,8 +36,8 @@
         android:layout_marginTop="6dp"
         android:text="Meal Type"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/planned_meal_image"
-        app:layout_constraintTop_toBottomOf="@+id/planned_meal_name" />
+        app:layout_constraintStart_toEndOf="@id/planned_meal_image"
+        app:layout_constraintTop_toBottomOf="@id/planned_meal_name" />
 
     <TextView
         android:id="@+id/dateTextView"
@@ -36,27 +46,19 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="6dp"
         android:text="Date"
-        app:layout_constraintStart_toEndOf="@+id/planned_meal_image"
-        app:layout_constraintTop_toBottomOf="@+id/planned_meal_type" />
-
-    <ImageView
-        android:id="@+id/planned_meal_image"
-        android:layout_width="67dp"
-        android:layout_height="76dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="24dp"
-        android:contentDescription=""
-        android:scaleType="centerCrop"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@id/planned_meal_image"
+        app:layout_constraintTop_toBottomOf="@id/planned_meal_type" />
 
     <Button
         android:id="@+id/delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="70dp"
         android:text="Delete"
         android:textColor="@color/white"
         android:textSize="14sp"
-        tools:layout_editor_absoluteX="265dp"
-        tools:layout_editor_absoluteY="64dp" />
+        app:layout_constraintBottom_toBottomOf="@id/planned_meal_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/planned_meal_image" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

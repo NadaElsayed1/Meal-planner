@@ -36,7 +36,7 @@ public class MealDetailsActivity extends AppCompatActivity implements SelectMeal
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_meal_details2);
+        setContentView(R.layout.activity_meal_details);
 
         initUI();
         repo2 = MealLocalDataSource.getInstance(getApplicationContext());
@@ -70,6 +70,8 @@ public class MealDetailsActivity extends AppCompatActivity implements SelectMeal
         MealDTO mealDTOCountry = (MealDTO) getIntent().getSerializableExtra("MealDetails");
         MealDTO mealDTOCategory = (MealDTO) getIntent().getSerializableExtra("MealCategoryDetails");
         MealDTO mealDTORandom = (MealDTO) getIntent().getSerializableExtra("MealOftheDay");
+        MealDTO mealDTOSearch = (MealDTO) getIntent().getSerializableExtra("MealSearch");
+        MealDTO mealDTOPlanned = (MealDTO) getIntent().getSerializableExtra("plannedMeal");
 
 
         mealDetailsPresenter2 = new MealDetailsPresenter(MealRemoteDataStructure.getInstance(), this);
@@ -84,6 +86,16 @@ public class MealDetailsActivity extends AppCompatActivity implements SelectMeal
         {
             mealDetailsPresenter2.lookupMealById(mealDTORandom.getIdMeal());
             currentMealDTO2 = mealDTORandom;
+        }
+        else if (mealDTOSearch != null)
+        {
+            mealDetailsPresenter2.lookupMealById(mealDTOSearch.getIdMeal());
+            currentMealDTO2 = mealDTOSearch;
+        }
+        else if (mealDTOPlanned != null)
+        {
+            mealDetailsPresenter2.lookupMealById(mealDTOPlanned.getIdMeal());
+            currentMealDTO2 = mealDTOPlanned;
         }
         else {
             Log.e("MealDetailsActivity", "No MealDTO found in the intent");
@@ -119,7 +131,10 @@ public class MealDetailsActivity extends AppCompatActivity implements SelectMeal
 
     private void addMealToPlan(String mealType, String selectedDate) {
         if (currentMealDTO2 != null) {
-            MealPlannerDTO mealPlanner = new MealPlannerDTO(currentMealDTO2.getStrMeal(), mealType, selectedDate, currentMealDTO2.getStrMealThumb());
+            MealPlannerDTO mealPlanner = new MealPlannerDTO(currentMealDTO2, selectedDate, mealType);
+            mealPlanner.setIdMeal(currentMealDTO2.getIdMeal());
+            mealPlanner.setMealType(mealType);
+            mealPlanner.setDate(selectedDate);
             plannerRepo.insertMealPlanned(mealPlanner);
             Toast.makeText(this, "Meal added to plan: " + currentMealDTO2.getStrMeal(), Toast.LENGTH_SHORT).show();
         } else {

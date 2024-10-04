@@ -10,7 +10,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import com.example.mealsplanner.model.MealDTO;
 import com.example.mealsplanner.model.MealPlannerDTO;
 
-@Database(entities = {MealDTO.class, MealPlannerDTO.class}, version = 3, exportSchema = false)
+@Database(entities = {MealDTO.class, MealPlannerDTO.class}, version = 4, exportSchema = false)
 public abstract class MealDatabase extends RoomDatabase {
     private static MealDatabase instance = null;
 
@@ -26,11 +26,5 @@ public abstract class MealDatabase extends RoomDatabase {
         }
         return instance;
     }
-//    static final Migration MIGRATION_2_3 = new Migration(2, 3) {
-//        @Override
-//        public void migrate(SupportSQLiteDatabase database) {
-//            database.execSQL("ALTER TABLE MealPlannerDTO ADD COLUMN newColumnName TEXT");
-//        }
-//    };
 
 }

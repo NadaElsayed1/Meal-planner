@@ -4,15 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity(tableName = "meal_planner")
 public class MealPlannerDTO {
     @PrimaryKey
     @NonNull
     private String idMeal;
     private String date;
+
+    public MealPlannerDTO() {
+    }
+
     private String mealType;
     private String idCategory;
     private String strCategory;
@@ -70,11 +71,58 @@ public class MealPlannerDTO {
     private String strCreativeCommonsConfirmed;
     private String dateModified;
 
-    public MealPlannerDTO(String strMeal, String mealType, String date, String strMealThumb) {
-        this.strMeal = strMeal;
-        this.mealType = mealType;
+    public MealPlannerDTO(MealDTO mealDTO, String date, String mealType) {
+        this.idMeal = mealDTO.getIdMeal();
+        this.strMeal = mealDTO.getStrMeal();
+        this.strCategory = mealDTO.getStrCategory();
+        this.strCategoryThumb = mealDTO.getStrCategoryThumb();
+        this.strArea = mealDTO.getStrArea();
+        this.strInstructions = mealDTO.getStrInstructions();
+        this.strMealThumb = mealDTO.getStrMealThumb();
+        this.strTags = mealDTO.getStrTags();
+        this.strYoutube = mealDTO.getStrYoutube();
         this.date = date;
-        this.strMealThumb = strMealThumb;
+        this.mealType = mealType;
+        this.strIngredient1 = mealDTO.getStrIngredient1();
+        this.strIngredient2 = mealDTO.getStrIngredient2();
+        this.strIngredient3 = mealDTO.getStrIngredient3();
+        this.strIngredient4 = mealDTO.getStrIngredient4();
+        this.strIngredient5 = mealDTO.getStrIngredient5();
+        this.strIngredient6 = mealDTO.getStrIngredient6();
+        this.strIngredient7 = mealDTO.getStrIngredient7();
+        this.strIngredient8 = mealDTO.getStrIngredient8();
+        this.strIngredient9 = mealDTO.getStrIngredient9();
+        this.strIngredient10 = mealDTO.getStrIngredient10();
+        this.strIngredient11 = mealDTO.getStrIngredient11();
+        this.strIngredient12 = mealDTO.getStrIngredient12();
+        this.strIngredient13 = mealDTO.getStrIngredient13();
+        this.strIngredient14 = mealDTO.getStrIngredient14();
+        this.strIngredient15 = mealDTO.getStrIngredient15();
+        this.strIngredient16 = mealDTO.getStrIngredient16();
+        this.strIngredient17 = mealDTO.getStrIngredient17();
+        this.strIngredient18 = mealDTO.getStrIngredient18();
+        this.strIngredient19 = mealDTO.getStrIngredient19();
+        this.strIngredient20 = mealDTO.getStrIngredient20();
+        this.strMeasure1 = mealDTO.getStrMeasure1();
+        this.strMeasure2 = mealDTO.getStrMeasure2();
+        this.strMeasure3 = mealDTO.getStrMeasure3();
+        this.strMeasure4 = mealDTO.getStrMeasure4();
+        this.strMeasure5 = mealDTO.getStrMeasure5();
+        this.strMeasure6 = mealDTO.getStrMeasure6();
+        this.strMeasure7 = mealDTO.getStrMeasure7();
+        this.strMeasure8 = mealDTO.getStrMeasure8();
+        this.strMeasure9 = mealDTO.getStrMeasure9();
+        this.strMeasure10 = mealDTO.getStrMeasure10();
+        this.strMeasure11 = mealDTO.getStrMeasure11();
+        this.strMeasure12 = mealDTO.getStrMeasure12();
+        this.strMeasure13 = mealDTO.getStrMeasure13();
+        this.strMeasure14 = mealDTO.getStrMeasure14();
+        this.strMeasure15 = mealDTO.getStrMeasure15();
+        this.strMeasure16 = mealDTO.getStrMeasure16();
+        this.strMeasure17 = mealDTO.getStrMeasure17();
+        this.strMeasure18 = mealDTO.getStrMeasure18();
+        this.strMeasure19 = mealDTO.getStrMeasure19();
+        this.strMeasure20 = mealDTO.getStrMeasure20();
     }
     public String getIdMeal() {
         return idMeal;
@@ -539,57 +587,4 @@ public class MealPlannerDTO {
         return dateModified;
     }
 
-    /*helper method to get a list of ingredients*/
-    public List<String> getIngredients() {
-        List<String> ingredients = new ArrayList<>();
-        if (strIngredient1 != null && !strIngredient1.isEmpty()) ingredients.add(strIngredient1);
-        if (strIngredient2 != null && !strIngredient2.isEmpty()) ingredients.add(strIngredient2);
-        if (strIngredient3 != null && !strIngredient3.isEmpty()) ingredients.add(strIngredient3);
-        if (strIngredient4 != null && !strIngredient4.isEmpty()) ingredients.add(strIngredient4);
-        if (strIngredient5 != null && !strIngredient5.isEmpty()) ingredients.add(strIngredient5);
-        if (strIngredient6 != null && !strIngredient6.isEmpty()) ingredients.add(strIngredient6);
-        if (strIngredient7 != null && !strIngredient7.isEmpty()) ingredients.add(strIngredient7);
-        if (strIngredient8 != null && !strIngredient8.isEmpty()) ingredients.add(strIngredient8);
-        if (strIngredient9 != null && !strIngredient9.isEmpty()) ingredients.add(strIngredient9);
-        if (strIngredient10 != null && !strIngredient10.isEmpty()) ingredients.add(strIngredient10);
-        if (strIngredient11 != null && !strIngredient11.isEmpty()) ingredients.add(strIngredient11);
-        if (strIngredient12 != null && !strIngredient12.isEmpty()) ingredients.add(strIngredient12);
-        if (strIngredient13 != null && !strIngredient13.isEmpty()) ingredients.add(strIngredient13);
-        if (strIngredient14 != null && !strIngredient14.isEmpty()) ingredients.add(strIngredient14);
-        if (strIngredient15 != null && !strIngredient15.isEmpty()) ingredients.add(strIngredient15);
-        if (strIngredient16 != null && !strIngredient16.isEmpty()) ingredients.add(strIngredient16);
-        if (strIngredient17 != null && !strIngredient17.isEmpty()) ingredients.add(strIngredient17);
-        if (strIngredient18 != null && !strIngredient18.isEmpty()) ingredients.add(strIngredient18);
-        if (strIngredient19 != null && !strIngredient19.isEmpty()) ingredients.add(strIngredient19);
-        if (strIngredient20 != null && !strIngredient20.isEmpty()) ingredients.add(strIngredient20);
-
-        return ingredients;
-    }
-
-    /*helper method to get a list of measures*/
-    public List<String> getMeasures() {
-        List<String> measures = new ArrayList<>();
-        if (strMeasure1 != null && !strMeasure1.isEmpty()) measures.add(strMeasure1);
-        if (strMeasure2 != null && !strMeasure2.isEmpty()) measures.add(strMeasure2);
-        if (strMeasure3 != null && !strMeasure3.isEmpty()) measures.add(strMeasure3);
-        if (strMeasure4 != null && !strMeasure4.isEmpty()) measures.add(strMeasure4);
-        if (strMeasure5 != null && !strMeasure5.isEmpty()) measures.add(strMeasure5);
-        if (strMeasure6 != null && !strMeasure6.isEmpty()) measures.add(strMeasure6);
-        if (strMeasure7 != null && !strMeasure7.isEmpty()) measures.add(strMeasure7);
-        if (strMeasure8 != null && !strMeasure8.isEmpty()) measures.add(strMeasure8);
-        if (strMeasure9 != null && !strMeasure9.isEmpty()) measures.add(strMeasure9);
-        if (strMeasure10 != null && !strMeasure10.isEmpty()) measures.add(strMeasure10);
-        if (strMeasure11 != null && !strMeasure11.isEmpty()) measures.add(strMeasure11);
-        if (strMeasure12 != null && !strMeasure12.isEmpty()) measures.add(strMeasure12);
-        if (strMeasure13 != null && !strMeasure13.isEmpty()) measures.add(strMeasure13);
-        if (strMeasure14 != null && !strMeasure14.isEmpty()) measures.add(strMeasure14);
-        if (strMeasure15 != null && !strMeasure15.isEmpty()) measures.add(strMeasure15);
-        if (strMeasure16 != null && !strMeasure16.isEmpty()) measures.add(strMeasure16);
-        if (strMeasure17 != null && !strMeasure17.isEmpty()) measures.add(strMeasure17);
-        if (strMeasure18 != null && !strMeasure18.isEmpty()) measures.add(strMeasure18);
-        if (strMeasure19 != null && !strMeasure19.isEmpty()) measures.add(strMeasure19);
-        if (strMeasure20 != null && !strMeasure20.isEmpty()) measures.add(strMeasure20);
-
-        return measures;
-    }
 }

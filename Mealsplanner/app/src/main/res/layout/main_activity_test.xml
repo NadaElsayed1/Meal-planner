@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!-- Toolbar -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="0dp"
@@ -18,7 +17,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- HorizontalScrollView for CardViews -->
     <HorizontalScrollView
         android:id="@+id/card_scroll"
         android:layout_width="wrap_content"
@@ -35,7 +33,6 @@
             android:orientation="horizontal"
             android:padding="16dp">
 
-            <!-- Card for Meal of the Day -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/meal_of_the_day_card"
                 android:layout_width="wrap_content"
@@ -73,7 +70,6 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Card for Meals by Category -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/meals_by_category_card"
                 android:layout_width="wrap_content"
@@ -110,7 +106,6 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Card for Meals Categories (New Card) -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/meals_categories_card"
                 android:layout_width="wrap_content"
@@ -147,7 +142,6 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Card for Meals by Country -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/meals_by_country_card"
                 android:layout_width="wrap_content"
@@ -184,7 +178,6 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Card for Search Meals -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/search_meals_card"
                 android:layout_width="wrap_content"
@@ -221,7 +214,6 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Card for list of countries-->
             <androidx.cardview.widget.CardView
                 android:id="@+id/country_list_card"
                 android:layout_width="wrap_content"
@@ -251,7 +243,6 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Card for list of ingredients-->
             <androidx.cardview.widget.CardView
                 android:id="@+id/ingredient_list_card"
                 android:layout_width="wrap_content"
@@ -281,7 +272,6 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Card for ingredients-->
             <androidx.cardview.widget.CardView
                 android:id="@+id/ingredient_card"
                 android:layout_width="wrap_content"
@@ -311,7 +301,6 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Card for meal id-->
             <androidx.cardview.widget.CardView
                 android:id="@+id/mealId_card"
                 android:layout_width="wrap_content"
@@ -344,7 +333,6 @@
         </LinearLayout>
     </HorizontalScrollView>
 
-    <!-- Fragment container to display the fragments -->
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="0dp"

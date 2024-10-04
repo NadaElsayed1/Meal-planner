@@ -6,7 +6,6 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- Title for the Meal Planner -->
     <TextView
         android:id="@+id/mealPlannerTitle"
         android:layout_width="wrap_content"
@@ -18,7 +17,6 @@
         android:textStyle="bold" />
 
 
-    <!-- RecyclerView to display meal planner items -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mealPlannerRecyclerView"
         android:layout_width="match_parent"
