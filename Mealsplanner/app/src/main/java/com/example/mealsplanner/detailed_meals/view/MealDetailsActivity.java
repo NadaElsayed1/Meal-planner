@@ -1,6 +1,7 @@
 package com.example.mealsplanner.detailed_meals.view;
 
 import android.app.DatePickerDialog;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.webkit.WebView;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.mealsplanner.R;
 import com.example.mealsplanner.db.MealLocalDataSource;
 import com.example.mealsplanner.db.MealPlannerLocalDataSource;
@@ -26,7 +28,7 @@ public class MealDetailsActivity extends AppCompatActivity implements SelectMeal
     private TextView mealName, mealDescription, mealCategory, mealCountry;
     private ImageView mealImage, addToPlanButton;
     private WebView mealVideo;
-    private Button addToFavBtn;
+    private ImageView addToFavBtn;
     private Spinner mealTypeSpinner;
     private MealDetailsPresenter mealDetailsPresenter;
     private MealLocalDataSource repo;
@@ -38,6 +40,9 @@ public class MealDetailsActivity extends AppCompatActivity implements SelectMeal
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meal_details);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.appTheme));}
 
         initUI();
         repo = MealLocalDataSource.getInstance(getApplicationContext());
@@ -56,13 +61,13 @@ public class MealDetailsActivity extends AppCompatActivity implements SelectMeal
     }
 
     private void initUI() {
-        mealName = findViewById(R.id.meal_name2);
-        mealImage = findViewById(R.id.meal_image2);
-        mealDescription = findViewById(R.id.item_meal_description2);
-        mealCategory = findViewById(R.id.item_meal_category2);
-        mealCountry = findViewById(R.id.item_meal_country2);
-        mealVideo = findViewById(R.id.item_meal_video2);
-        addToFavBtn = findViewById(R.id.add_to_fav_btn2);
+        mealName = findViewById(R.id.meal_name);
+        mealImage = findViewById(R.id.meal_image);
+        mealDescription = findViewById(R.id.item_meal_description);
+        mealCategory = findViewById(R.id.item_meal_category);
+        mealCountry = findViewById(R.id.item_meal_country);
+        mealVideo = findViewById(R.id.item_meal_video);
+        addToFavBtn = findViewById(R.id.add_to_fav_btn);
         mealTypeSpinner = findViewById(R.id.meal_type_spinner);
         addToPlanButton = findViewById(R.id.add_to_plan_button);
     }
@@ -73,6 +78,7 @@ public class MealDetailsActivity extends AppCompatActivity implements SelectMeal
         MealDTO mealDTORandom = (MealDTO) getIntent().getSerializableExtra("MealOftheDay");
         MealDTO mealDTOSearch = (MealDTO) getIntent().getSerializableExtra("MealSearch");
         MealPlannerDTO mealDTOPlanned = (MealPlannerDTO) getIntent().getSerializableExtra("plannedMeal");
+        MealDTO favMealDTO = (MealDTO) getIntent().getSerializableExtra("favouriteMeal");
 
         mealDetailsPresenter = new MealDetailsPresenter(MealRemoteDataStructure.getInstance(), this);
 
@@ -93,17 +99,24 @@ public class MealDetailsActivity extends AppCompatActivity implements SelectMeal
             // Make the calendar and spinner invisible
             addToPlanButton.setVisibility(View.GONE);
             mealTypeSpinner.setVisibility(View.GONE);
-        } else {
+        }
+        else if (favMealDTO != null) {
+            mealDetailsPresenter.lookupMealById(favMealDTO.getIdMeal());
+            currentMealDTO = favMealDTO;
+            // Make the favourite icon invisible
+            addToFavBtn.setVisibility(View.GONE);
+        }else {
             Log.e("MealDetailsActivity", "No MealDTO found in the intent");
             finish();
         }
     }
 
     private void setupMealTypeSpinner() {
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.meal_types, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.meal_types, R.layout.custom_spinner_item);
+        adapter.setDropDownViewResource(R.layout.custom_spinner_dropdown_item);
         mealTypeSpinner.setAdapter(adapter);
     }
+
 
     private void setupAddToPlanListener() {
         addToPlanButton.setOnClickListener(v -> {
@@ -147,10 +160,11 @@ public class MealDetailsActivity extends AppCompatActivity implements SelectMeal
 
         Glide.with(this)
                 .load(mealDTO.getStrMealThumb())
+                .transform(new RoundedCorners(16))
                 .into(mealImage);
 
         RecyclerView ingredientsRecyclerView = findViewById(R.id.ingredients_recycler_view);
-        ingredientsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        ingredientsRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         IngredientAdapter ingredientAdapter = new IngredientAdapter(this, mealDTO.getIngredients(), mealDTO.getMeasures());
         ingredientsRecyclerView.setAdapter(ingredientAdapter);

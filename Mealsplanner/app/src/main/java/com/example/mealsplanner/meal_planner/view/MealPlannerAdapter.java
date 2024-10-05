@@ -83,7 +83,6 @@ public class MealPlannerAdapter extends RecyclerView.Adapter<MealPlannerAdapter.
             public void onClick(View view) {
                 if(mealClickListener != null)
                 {
-//                    MealDTO mealDTO = mealPlanner.getMealDTO();
                     mealClickListener.onMealClick(mealPlanner);
                 }
             }
@@ -108,7 +107,7 @@ public class MealPlannerAdapter extends RecyclerView.Adapter<MealPlannerAdapter.
         TextView mealTypeTextView;
         TextView dateTextView;
         TextView mealName;
-        Button delet;
+        ImageView delet;
         ImageView plannedMealImage;
 
         public MealPlannerViewHolder(@NonNull View itemView) {

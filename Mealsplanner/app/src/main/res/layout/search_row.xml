@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/detailed_meal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -8,38 +9,42 @@
     android:clickable="true"
     android:elevation="4dp"
     android:focusable="true"
-    android:foreground="?attr/selectableItemBackground">
+    android:foreground="?attr/selectableItemBackground"
+    app:cardCornerRadius="16dp"
+    app:cardBackgroundColor="@color/backgroundTwo">
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="8dp"
-    android:background="?android:attr/selectableItemBackground">
-
-    <TextView
-        android:id="@+id/search_meal_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="monospace"
-        android:textSize="20sp"
-        android:textColor="@color/darkGreen"
-        android:textStyle="bold"/>
-
-    <ImageView
-        android:id="@+id/search_meal_image"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:scaleType="centerCrop"
-        android:contentDescription=""/>
-
-    <TextView
-        android:id="@+id/search_meal_description"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/darkGreen"
-        android:textSize="18sp"/>
-</LinearLayout>
-</androidx.cardview.widget.CardView>
+        android:orientation="horizontal"
+        android:padding="8dp">
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/search_meal_image"
+            android:layout_width="86dp"
+            android:layout_height="86dp"
+            android:contentDescription=""
+            android:scaleType="centerCrop"
+            app:shapeAppearanceOverlay="@style/RoundedImageView" />
+
+        <TextView
+            android:id="@+id/search_meal_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="monospace"
+            android:textColor="@color/appTheme"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center_vertical" />
+
+<!--        <TextView-->
+<!--            android:id="@+id/search_meal_description"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="8dp"-->
+<!--            android:textColor="@color/darkGreen"-->
+<!--            android:textSize="18sp"-->
+<!--            android:gravity="center_vertical" />-->
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

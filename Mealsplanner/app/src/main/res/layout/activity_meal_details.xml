@@ -1,86 +1,132 @@
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="true">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/meal_name2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="24sp"
-            android:padding="16dp" />
+        android:background="@color/backgroundColor">
 
         <ImageView
-            android:id="@+id/meal_image2"
-            android:layout_width="match_parent"
+            android:id="@+id/add_to_fav_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="4dp"
+            android:contentDescription="add to fav"
+            android:src="@drawable/baseline_favorite_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/meal_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="casual"
+            android:padding="16dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/appTheme"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/add_to_fav_btn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/meal_image"
+            android:layout_width="0dp"
             android:layout_height="200dp"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/meal_name"
+            app:shapeAppearanceOverlay="@style/RoundedImageView" />
+
 
         <Spinner
             android:id="@+id/meal_type_spinner"
-            android:layout_width="match_parent"
+            android:layout_width="270dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="18dp"
+            android:backgroundTint="@color/appTheme"
+            app:layout_constraintBottom_toTopOf="@+id/ingredients_recycler_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/meal_image" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="16dp">
-
-            <Button
-                android:id="@+id/add_to_fav_btn2"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_weight="1"
-                android:text="Add to Favorites"
-                android:textColor="@color/white" />
-
-            <ImageView
-                android:id="@+id/add_to_plan_button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:contentDescription="add to plan"
-                android:src="@drawable/baseline_calendar_month_24" />
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/add_to_plan_button"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="28dp"
+            android:contentDescription="add to plan"
+            android:src="@drawable/baseline_date_range_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/meal_type_spinner"
+            app:layout_constraintTop_toBottomOf="@+id/meal_image" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/ingredients_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginTop="16dp"
+            android:scrollbars="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/add_to_plan_button" />
+
 
         <TextView
-            android:id="@+id/item_meal_category2"
+            android:id="@+id/item_meal_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="16dp" />
+            android:fontFamily="monospace"
+            android:textStyle="bold"
+            android:padding="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ingredients_recycler_view" />
 
         <TextView
-            android:id="@+id/item_meal_country2"
+            android:id="@+id/item_meal_country"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="16dp" />
+            android:fontFamily="monospace"
+            android:textStyle="bold"
+            android:padding="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_meal_category" />
 
         <TextView
-            android:id="@+id/item_meal_description2"
+            android:id="@+id/item_meal_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:lineHeight="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="16dp" />
+            android:padding="16dp"
+            android:fontFamily="monospace"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_meal_country" />
 
         <WebView
-            android:id="@+id/item_meal_video2"
-            android:layout_width="match_parent"
+            android:id="@+id/item_meal_video"
+            android:layout_width="0dp"
             android:layout_height="250dp"
-            android:layout_marginTop="16dp" />
-    </LinearLayout>
+            android:backgroundTint="@color/appTheme"
+            android:background="@color/appTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_meal_description" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -5,13 +5,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.mealsplanner.R;
+import com.example.mealsplanner.favourite.view.OnMealClickListener;
 import com.example.mealsplanner.model.MealDTO;
 
 import java.util.List;
@@ -22,11 +23,14 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.ViewHolder> {
     private List<MealDTO> mealDTO;
     private FavMealClickListener listener;
     public static final String TAG = "favAdapter";
+    private OnMealClickListener mealClickListener;
 
-    public FavAdapter(Context context, List<MealDTO> productList, FavMealClickListener _listener) {
+
+    public FavAdapter(Context context, List<MealDTO> productList, FavMealClickListener _listener, OnMealClickListener mealClickListener) {
         this.context = context;
         this.mealDTO = productList;
         this.listener = _listener;
+        this.mealClickListener = mealClickListener;
     }
 
     public void setList(List<MealDTO> updatedProducts) {
@@ -56,18 +60,25 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_favourite, parent, false);
         return new ViewHolder(view);
-//        return null;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MealDTO mealDTO = this.mealDTO.get(position);
         holder.mealNameTextView.setText(mealDTO.getStrMeal());
-//        holder.mealDesription.setText(mealDTO.getStrInstructions());
         Glide.with(context)
                 .load(mealDTO.getStrMealThumb())
+                .transform(new RoundedCorners(16))
                 .into(holder.mealImageView);
-
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mealClickListener != null)
+                {
+                    mealClickListener.onMealClick(mealDTO);
+                }
+            }
+        });
         holder.removeFavbtn.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -86,11 +97,11 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView mealNameTextView;
         private  ImageView mealImageView;
-        Button removeFavbtn;
+        private ImageView removeFavbtn;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            mealNameTextView = itemView.findViewById(R.id.category_meal_title);
-            mealImageView = itemView.findViewById(R.id.category_meal_image);
+            mealNameTextView = itemView.findViewById(R.id.favourite_meal_title);
+            mealImageView = itemView.findViewById(R.id.favourite_meal_image);
             removeFavbtn = itemView.findViewById(R.id.removeFavbtn);
         }
     }

@@ -9,4 +9,11 @@
     <color name="darkGreen">#6E9147</color>
     <color name="yellow">#EEDD3D</color>
     <color name="orrange">#FFC107</color>
+    <color name="babypink">#EEC4C0</color>
+    <color name="appTheme">#9B1313</color>
+    <color name="backgroundColor">#FAF3D5</color>
+    <color name="backgroundTwo">#F6D29F</color>
+    <color name="totyy">#D52349</color>
+    <color name="Toty">#C9163D</color>
+    <color name="darkToty">#9F1130</color>
 </resources>

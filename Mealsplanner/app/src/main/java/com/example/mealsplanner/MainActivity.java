@@ -1,8 +1,10 @@
 package com.example.mealsplanner;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import com.example.mealsplanner.favourite.view.FavouriteMealsFragment;
 import com.example.mealsplanner.meal_planner.view.MealPlannerFragment;
@@ -16,11 +18,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.appTheme));}
+
+
+            BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+            bottomNavigationView.setItemIconTintList(ContextCompat.getColorStateList(this, R.color.backgroundColor));
 
         if (savedInstanceState == null) {
             loadFragment(new CombinedFragment());
         }
+
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -46,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
     }
 
     private void loadFragment(Fragment fragment) {

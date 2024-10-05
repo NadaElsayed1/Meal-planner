@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.mealsplanner.R;
 import com.example.mealsplanner.model.MealDTO;
 import java.util.ArrayList;
@@ -48,6 +49,7 @@ public class MealOfTheDayAdapter extends RecyclerView.Adapter<MealOfTheDayAdapte
         holder.mealNameTextView.setText(mealDTO.getStrMeal());
         Glide.with(context)
                 .load(mealDTO.getStrMealThumb())
+                .transform(new RoundedCorners(16))
                 .into(holder.mealImageView);
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) {
