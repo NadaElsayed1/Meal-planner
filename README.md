@@ -82,4 +82,3 @@ Favorite meals are stored locally using Room database for offline viewing.
 1. Clone the repository:
    ```bash
    git clone https://github.com/NadaElsayed1/Meal-planner.git
-  ```
