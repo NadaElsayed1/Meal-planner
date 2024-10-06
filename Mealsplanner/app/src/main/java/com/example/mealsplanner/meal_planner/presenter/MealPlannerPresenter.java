@@ -23,9 +23,4 @@ public class MealPlannerPresenter implements IMealPlannerPresenter {
         view.RemovePlannedItem(mealPlannerDTO);
     }
 
-    @Override
-    public void loadMealPlansForDate(String date) {
-        List<MealPlannerDTO> mealPlannerList = repo.getMealPlansByDate(date);
-        view.showMealPlans(mealPlannerList);
-    }
 }

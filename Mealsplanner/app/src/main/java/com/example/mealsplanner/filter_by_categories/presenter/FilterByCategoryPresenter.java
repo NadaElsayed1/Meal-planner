@@ -1,18 +1,17 @@
-package com.example.mealsplanner.lookup_meal_by_id.presenter;
+package com.example.mealsplanner.filter_by_categories.presenter;
 
-import com.example.mealsplanner.lookup_meal_by_id.view.IMealByIDFragment;
+import com.example.mealsplanner.filter_by_categories.view.IFilterByCategoryView;
 import com.example.mealsplanner.model.MealDTO;
 import com.example.mealsplanner.model.MealRepository;
 import com.example.mealsplanner.network.NetworkCallback;
-
 import java.util.List;
 
-public class MealByIDPresenter implements IMealByIDPresenter , NetworkCallback {
+public class FilterByCategoryPresenter implements IFilterByCategoryPresenter, NetworkCallback {
 
     private MealRepository mealRepository;
-    private IMealByIDFragment view;
+    private IFilterByCategoryView view;
 
-    public MealByIDPresenter(MealRepository mealRepository, IMealByIDFragment view) {
+    public FilterByCategoryPresenter(MealRepository mealRepository, IFilterByCategoryView view) {
         this.mealRepository = mealRepository;
         this.view = view;
     }
@@ -28,8 +27,8 @@ public class MealByIDPresenter implements IMealByIDPresenter , NetworkCallback {
     }
 
     @Override
-    public void lookupMealById(String mealId) {
-        mealRepository.lookupMealById(mealId, this);
-
+    public void getMealsByCategory(String category) {
+        mealRepository.getMealsByCategory(category,this);
     }
+
 }

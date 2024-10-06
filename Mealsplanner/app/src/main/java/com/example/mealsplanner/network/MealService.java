@@ -36,7 +36,5 @@ public interface MealService {
     @GET("lookup.php")
     Call<MealResponse> lookupMealById(@Query("i") String mealId);
 
-    @GET("latest.php")
-    Call<MealResponse> getLatestMeals();
 }
 

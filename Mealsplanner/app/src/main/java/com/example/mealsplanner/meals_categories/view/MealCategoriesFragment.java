@@ -32,7 +32,10 @@ public class MealCategoriesFragment extends Fragment implements IMealCategoriesF
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_meal_categories, container, false);
+        return inflater.inflate(R.layout.fragment_meal_categories, container, false);}
+
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         Title = view.findViewById(R.id.categories_title);
         recyclerView = view.findViewById(R.id.recyclerViewCategories);
@@ -47,8 +50,6 @@ public class MealCategoriesFragment extends Fragment implements IMealCategoriesF
         mealRepository = new MealRepository(MealRemoteDataStructure.getInstance(), MealLocalDataSource.getInstance(requireContext()));
         mealCategoriesPresenter = new MealCategoriesPresenter(mealRepository, this);
         mealCategoriesPresenter.getMealCategories();
-
-        return view;
     }
 
     @Override
@@ -70,7 +71,7 @@ public class MealCategoriesFragment extends Fragment implements IMealCategoriesF
 
     @Override
     public void onLayoutClick(CategoryDTO categoryDTO) {
-        Intent intent = new Intent(this.getActivity(), MealCategoryDetailsActivity.class);
+        Intent intent = new Intent(this.getActivity(), FilterCategoryDetailsActivity.class);
         intent.putExtra("MealCategory",categoryDTO);
         startActivity(intent);
     }

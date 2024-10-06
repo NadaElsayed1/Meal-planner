@@ -34,7 +34,10 @@ public class MealOfTheDayFragment extends Fragment implements IMealOfTheDayView,
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_meal_of_the_day, container, false);
+    return inflater.inflate(R.layout.fragment_meal_of_the_day, container, false);}
+
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         Title = view.findViewById(R.id.meal_of_the_day_title);
         suggestMeal = view.findViewById(R.id.RandomRecyclerView);
@@ -47,8 +50,6 @@ public class MealOfTheDayFragment extends Fragment implements IMealOfTheDayView,
 
         mealOfTheDayPresenter = new MealOfTheDayPresenter(mealRepository, this);
         mealOfTheDayPresenter.getMealOfTheDay();
-
-        return view;
     }
 
     @Override

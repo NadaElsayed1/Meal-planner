@@ -17,15 +17,12 @@ public interface MealPlannerDAO {
     @Query("SELECT * FROM meal_planner")
     LiveData<List<MealPlannerDTO>> getAllPlannedMeals();
 
+    @Query("SELECT * FROM meal_planner WHERE date = :date AND mealType = :mealType")
+    MealPlannerDTO getMealByDateAndType(String date, String mealType);
+
     @Insert
     void insertMealPlan(MealPlannerDTO mealPlanner);
 
     @Delete
     void deleteMealPlan(MealPlannerDTO mealPlanner);
-
-    @Query("SELECT * FROM meal_planner WHERE date = :date")
-    List<MealPlannerDTO> getMealPlansByDate(String date);
-
-//    @Query("DELETE FROM meal_planner WHERE idMeal = :idMeal")
-//    void removeMealFromPlanner(MealPlannerDTO mealPlannerDTO);
 }

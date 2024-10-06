@@ -127,16 +127,49 @@ public class MealDetailsActivity extends AppCompatActivity implements SelectMeal
 
     private void showDatePickerDialog(String mealType) {
         Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int currentYear = calendar.get(Calendar.YEAR);
+        int currentMonth = calendar.get(Calendar.MONTH);
+        int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, year1, month1, dayOfMonth) -> {
-            String selectedDate = dayOfMonth + "/" + (month1 + 1) + "/" + year1;
-            addMealToPlan(mealType, selectedDate);
-        }, year, month, day);
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, year, month, dayOfMonth) -> {
+            Calendar selectedDateCalendar = Calendar.getInstance();
+            selectedDateCalendar.set(year, month, dayOfMonth);
+            String selectedDate = dayOfMonth + "/" + (month + 1) + "/" + year;
+
+            if (selectedDateCalendar.before(calendar)) {
+                Toast.makeText(MealDetailsActivity.this, "You cannot select a past date.", Toast.LENGTH_SHORT).show();
+            } else {
+                addMealToPlan(mealType, selectedDate);
+            }
+        }, currentYear, currentMonth, currentDay);
+
         datePickerDialog.show();
     }
+
+//    private void addMealToPlan(String mealType, String selectedDate) {
+//        if (currentMealDTO != null) {
+//            try {
+//                MealPlannerDTO existingMeal = plannerRepo.getMealByDateAndType(selectedDate, mealType);
+//
+//                if (existingMeal != null) {
+//                    Toast.makeText(this, "A meal is already planned for " + mealType + " on " + selectedDate, Toast.LENGTH_SHORT).show();
+//                } else {
+//                    MealPlannerDTO mealPlanner = new MealPlannerDTO(currentMealDTO, selectedDate, mealType);
+//                    mealPlanner.setIdMeal(currentMealDTO.getIdMeal());
+//                    mealPlanner.setMealType(mealType);
+//                    mealPlanner.setDate(selectedDate);
+//                    plannerRepo.insertMealPlanned(mealPlanner);
+//                    Toast.makeText(this, "Meal added to plan: " + currentMealDTO.getStrMeal(), Toast.LENGTH_SHORT).show();
+//                }
+//            } catch (Exception e) {
+//                Toast.makeText(this, "An error occurred while adding the meal to the plan.", Toast.LENGTH_SHORT).show();
+//                Log.e("MealDetailsActivity", "Error adding meal to plan", e);
+//            }
+//        } else {
+//            Toast.makeText(this, "Error: No meal selected!", Toast.LENGTH_SHORT).show();
+//        }
+//    }
+
 
     private void addMealToPlan(String mealType, String selectedDate) {
         if (currentMealDTO != null) {
@@ -150,6 +183,7 @@ public class MealDetailsActivity extends AppCompatActivity implements SelectMeal
             Toast.makeText(this, "Error: No meal selected!", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     public void updateMealDetails(MealDTO mealDTO) {
         currentMealDTO = mealDTO;

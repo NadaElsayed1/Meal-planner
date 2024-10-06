@@ -17,7 +17,6 @@ public interface MealDAO {
     @Query("SELECT * FROM meals_table")
     LiveData<List<MealDTO>> getAllMeals();
 
-    /*to ignore repeated presses on the same button*/
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertMeal(MealDTO meal);
 

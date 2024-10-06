@@ -1,11 +1,8 @@
 package com.example.mealsplanner.meals_countries.presenter;
 
-import com.example.mealsplanner.meals_by_categories.presenter.IMealByCategoryPresenter;
-import com.example.mealsplanner.meals_by_categories.view.IMealByCategoryView;
 import com.example.mealsplanner.meals_countries.view.IMealCountriesFragment;
 import com.example.mealsplanner.model.MealDTO;
 import com.example.mealsplanner.model.MealRepository;
-import com.example.mealsplanner.network.MealRemoteDataStructure;
 import com.example.mealsplanner.network.NetworkCallback;
 
 import java.util.List;

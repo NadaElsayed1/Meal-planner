@@ -47,14 +47,12 @@ public class MealPlannerLocalDataSource {
         }).start();
     }
 
-    public List<MealPlannerDTO> getMealPlansByDate(String date) {
-        return mealPlannerDAO.getMealPlansByDate(date);
-    }
     public LiveData<List<MealPlannerDTO>> getAllPlannedMeals() {
         return storedPlannedMeals;
     }
 
-//    public void removeMealFromPlanner(MealPlannerDTO mealPlannerDTO) {
-//        mealPlannerDAO.removeMealFromPlanner(mealPlannerDTO);
-//    }
+    public MealPlannerDTO getMealByDateAndType(String date, String mealType) {
+        return mealPlannerDAO.getMealByDateAndType(date, mealType);
+    }
+
 }

@@ -43,13 +43,11 @@ public class MealPlannerAdapter extends RecyclerView.Adapter<MealPlannerAdapter.
     public List<MealPlannerDTO> getPlannedMeals() {
         return mealPlannerList;
     }
-    /*to remove an item from list temporarily*/
     public void removeItem(int position) {
         mealPlannerList.remove(position);
         notifyItemRemoved(position);
     }
 
-    /*to restore*/
     public void restoreItem(MealPlannerDTO product, int position) {
         mealPlannerList.add(position, product);
         notifyItemInserted(position);

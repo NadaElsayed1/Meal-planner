@@ -32,7 +32,10 @@ public class MealCountriesFragment extends Fragment implements IMealCountriesFra
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_meal_countries, container, false);
+        return inflater.inflate(R.layout.fragment_meal_countries, container, false);}
+
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         titleTextView = view.findViewById(R.id.countries_title);
         countriesRecyclerView = view.findViewById(R.id.CountryListRecyclerView);
@@ -45,8 +48,6 @@ public class MealCountriesFragment extends Fragment implements IMealCountriesFra
         mealRepository = new MealRepository(MealRemoteDataStructure.getInstance(), MealLocalDataSource.getInstance(requireContext()));
         mealCountriesPresenter = new MealCountriesPresenter(mealRepository, this);
         mealCountriesPresenter.getMealCountries();
-
-        return view;
     }
 
     @Override
@@ -67,7 +68,7 @@ public class MealCountriesFragment extends Fragment implements IMealCountriesFra
 
     @Override
     public void onCountryClick(MealDTO meal) {
-        Intent intent = new Intent(this.getActivity() , MealCountryDetailsActivity.class);
+        Intent intent = new Intent(this.getActivity() , FilterCountryDetailsActivity.class);
         intent.putExtra("Meal",meal);
         startActivity(intent);
 

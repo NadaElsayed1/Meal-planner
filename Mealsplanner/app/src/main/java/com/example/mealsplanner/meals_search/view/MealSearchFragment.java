@@ -46,8 +46,12 @@ public class MealSearchFragment extends Fragment implements IMealSearchView, OnM
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_meal_search, container, false);
+        return inflater.inflate(R.layout.fragment_meal_search, container, false);
+    }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         Title = view.findViewById(R.id.search_meals_title);
         search = view.findViewById(R.id.SearchRecyclerView);
         layoutManager = new LinearLayoutManager(getContext());
@@ -58,12 +62,6 @@ public class MealSearchFragment extends Fragment implements IMealSearchView, OnM
         mealRepository = new MealRepository(MealRemoteDataStructure.getInstance(),MealLocalDataSource.getInstance(requireContext()));
         mealSearchPresenter = new MealSearchPresenter(mealRepository, this);
 
-        return view;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
         radioGroup = view.findViewById(R.id.radioGroup);
         categoryButton = view.findViewById(R.id.categoryRadioButton);
         countryButton = view.findViewById(R.id.countryRadioButton2);

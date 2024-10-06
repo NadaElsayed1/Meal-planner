@@ -40,7 +40,6 @@ public class MealIngredientAdapter extends RecyclerView.Adapter<MealIngredientAd
     @NonNull
     @Override
     public MealIngredientAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        /*should be changed*/
         View view = LayoutInflater.from(context).inflate(R.layout.ingredient_list_row, parent, false);
         return new MealIngredientAdapter.ViewHolder(view);
     }
@@ -51,20 +50,6 @@ public class MealIngredientAdapter extends RecyclerView.Adapter<MealIngredientAd
         holder.mealNameTextView.setText(mealDTO.getStrIngredient());
 
         Log.d(TAG, "Ingredient loaded: " + mealDTO.getStrIngredient());
-//        List<String> ingredients = mealDTO.getIngredients();
-//
-//        // Combine ingredients into a single string to display
-//        StringBuilder ingredientList = new StringBuilder();
-//        for (String ingredient : ingredients) {
-//            if (ingredient != null && !ingredient.isEmpty()) {
-//                ingredientList.append(ingredient).append("\n");
-//            }
-//        }
-//
-//        // Set the ingredients to the TextView
-//        holder.mealNameTextView.setText(ingredientList.toString().trim());
-
-//        Log.d(TAG, "Ingredients loaded: " + ingredientList);
     }
 
 
@@ -79,7 +64,6 @@ public class MealIngredientAdapter extends RecyclerView.Adapter<MealIngredientAd
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            /*should be changed*/
             mealNameTextView = itemView.findViewById(R.id.ingredient_list_title);
 
         }

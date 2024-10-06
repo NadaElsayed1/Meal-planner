@@ -18,10 +18,10 @@
             android:name=".detailed_meals.view.MealDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".meals_countries.view.MealCountryDetailsActivity"
+            android:name=".meals_countries.view.FilterCountryDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".meals_categories.view.MealCategoryDetailsActivity"
+            android:name=".meals_categories.view.FilterCategoryDetailsActivity"
             android:exported="false" />
 <!--        <activity-->
 <!--            android:name=".meal_of_the_day.view.MealDetailsActivity"-->
@@ -40,10 +40,10 @@
             android:name=".meals_search.view.MealSearchFragment"
             android:exported="false" />
         <activity
-            android:name=".meals_by_countries.view.MealByCountryFragment"
+            android:name=".filter_by_countries.view.FilterByCountryFragment"
             android:exported="false" />
         <activity
-            android:name=".meals_by_categories.view.MealByCategoryFragment"
+            android:name=".filter_by_categories.view.FilterByCategoryFragment"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

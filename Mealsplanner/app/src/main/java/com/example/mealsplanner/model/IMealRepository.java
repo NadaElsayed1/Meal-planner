@@ -11,6 +11,5 @@ public interface IMealRepository {
     public void getMealCountries(NetworkCallback networkCallback);
     public void getMealIngredients(NetworkCallback networkCallback);
     public void filterMealsByIngredient(String ingredient, NetworkCallback networkCallback);
-    public void getLatestMeals(NetworkCallback networkCallback);
     public void lookupMealById(String mealId, NetworkCallback networkCallback);
     }

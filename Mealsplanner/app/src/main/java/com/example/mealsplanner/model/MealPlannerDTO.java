@@ -10,8 +10,6 @@ import java.util.List;
 @Entity(tableName = "meal_planner")
 public class MealPlannerDTO implements Serializable {
 
-//    private MealDTO mealDTO;
-
     @PrimaryKey
     @NonNull
     private String idMeal;
@@ -188,9 +186,6 @@ public class MealPlannerDTO implements Serializable {
 
 
     }
-//    public MealDTO getMealDTO() {
-//        return mealDTO;
-//    }
 
     public List<String> getIngredients() {
         return ingredients;

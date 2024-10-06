@@ -62,10 +62,6 @@ public class MealRepository implements IMealRepository  {
         mealRemoteDataStructure.filterMealsByIngredient(ingredient,networkCallback);
     }
 
-    public void getLatestMeals(NetworkCallback networkCallback) {
-        mealRemoteDataStructure.getLatestMeals(networkCallback);
-    }
-
     public void lookupMealById(String mealId, NetworkCallback networkCallback) {
         mealRemoteDataStructure.lookupMealById(mealId,networkCallback);
     }

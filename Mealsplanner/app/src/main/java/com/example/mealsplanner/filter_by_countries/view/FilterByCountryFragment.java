@@ -1,62 +1,56 @@
-package com.example.mealsplanner.lookup_meal_by_id.view;
+package com.example.mealsplanner.filter_by_countries.view;
 
 import android.os.Bundle;
-
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
+import androidx.appcompat.app.AlertDialog;
 import com.example.mealsplanner.R;
-import com.example.mealsplanner.db.MealLocalDataSource;
-import com.example.mealsplanner.lookup_meal_by_id.presenter.MealByIDPresenter;
+import com.example.mealsplanner.filter_by_countries.presenter.FilterByCountryPresenter;
 import com.example.mealsplanner.model.MealDTO;
+import com.example.mealsplanner.db.MealLocalDataSource;
 import com.example.mealsplanner.model.MealRepository;
 import com.example.mealsplanner.network.MealRemoteDataStructure;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class MealByIDFragment extends Fragment implements IMealByIDFragment {
-    private static final String TAG = "ViewMealId";
-    private static final String TAG2 = "ErrorViewMealId";
+public class FilterByCountryFragment extends Fragment implements IFilterByCountryView {
 
-    RecyclerView MealId;
+    RecyclerView Countries;
     TextView Title;
     RecyclerView.LayoutManager layoutManager;
-    MealByIDAdapter mealByIDAdapter;
-    MealByIDPresenter mealByIDPresenter;
-    MealRepository mealRepository;
+    FilterByCountryAdapter filterByCountryAdapter;
+    MealRemoteDataStructure APIClient;
+    FilterByCountryPresenter mealByCountryPresenter;
+    private MealRepository mealRepository;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_meal_by_i_d, container, false);}
+        return inflater.inflate(R.layout.fragment_meal_by_country, container, false);}
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Title = view.findViewById(R.id.Mealid_title);
-        MealId = view.findViewById(R.id.MealIdRecyclerView);
+        Title = view.findViewById(R.id.meals_by_country_title);
+        Countries = view.findViewById(R.id.CountryRecyclerView);
         layoutManager = new LinearLayoutManager(getContext());
-        MealId.setLayoutManager(layoutManager);
-        mealByIDAdapter = new MealByIDAdapter(getContext(), new ArrayList<>());
-        MealId.setAdapter(mealByIDAdapter);
+        Countries.setLayoutManager(layoutManager);
+        filterByCountryAdapter = new FilterByCountryAdapter(getContext(), new ArrayList<>());
+        Countries.setAdapter(filterByCountryAdapter);
 
         mealRepository = new MealRepository(MealRemoteDataStructure.getInstance(),MealLocalDataSource.getInstance(requireContext()));
-
-        mealByIDPresenter = new MealByIDPresenter(mealRepository, this);
-        mealByIDPresenter.lookupMealById("52772");
+        mealByCountryPresenter = new FilterByCountryPresenter(mealRepository, this);
+        mealByCountryPresenter.getMealsByCountry("Indian");
     }
 
     @Override
     public void showData(List<MealDTO> show) {
-        mealByIDAdapter.setList(show);
-        mealByIDAdapter.notifyDataSetChanged();
+        filterByCountryAdapter.setList(show);
+        filterByCountryAdapter.notifyDataSetChanged();
     }
 
     @Override

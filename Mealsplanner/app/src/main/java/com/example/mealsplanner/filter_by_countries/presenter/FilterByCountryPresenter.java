@@ -1,18 +1,18 @@
-package com.example.mealsplanner.lookup_meal_by_id.presenter;
+package com.example.mealsplanner.filter_by_countries.presenter;
 
-import com.example.mealsplanner.lookup_meal_by_id.view.IMealByIDFragment;
+import com.example.mealsplanner.filter_by_countries.view.IFilterByCountryView;
 import com.example.mealsplanner.model.MealDTO;
 import com.example.mealsplanner.model.MealRepository;
 import com.example.mealsplanner.network.NetworkCallback;
 
 import java.util.List;
 
-public class MealByIDPresenter implements IMealByIDPresenter , NetworkCallback {
+public class FilterByCountryPresenter implements IFilterByCountryPresenter, NetworkCallback {
 
     private MealRepository mealRepository;
-    private IMealByIDFragment view;
+    private IFilterByCountryView view;
 
-    public MealByIDPresenter(MealRepository mealRepository, IMealByIDFragment view) {
+    public FilterByCountryPresenter(MealRepository mealRepository, IFilterByCountryView view) {
         this.mealRepository = mealRepository;
         this.view = view;
     }
@@ -28,8 +28,8 @@ public class MealByIDPresenter implements IMealByIDPresenter , NetworkCallback {
     }
 
     @Override
-    public void lookupMealById(String mealId) {
-        mealRepository.lookupMealById(mealId, this);
+    public void getMealsByCountry(String country) {
+        mealRepository.getMealsByCountry(country, this);
 
     }
 }

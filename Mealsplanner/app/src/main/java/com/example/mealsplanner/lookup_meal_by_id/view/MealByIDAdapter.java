@@ -51,19 +51,16 @@ public class MealByIDAdapter extends RecyclerView.Adapter<MealByIDAdapter.ViewHo
     public void onBindViewHolder(@NonNull MealByIDAdapter.ViewHolder holder, int position) {
         MealDTO mealDTO = meals.get(position);
 
-        // Bind other data (e.g., name, image, etc.)
         holder.mealNameTextView.setText(mealDTO.getStrMeal());
         holder.drinkNameTextView.setText(mealDTO.getStrDrinkAlternate());
         holder.categoryNameTextView.setText(mealDTO.getStrCategory());
         holder.areaNameTextView.setText(mealDTO.getStrArea());
         holder.instructionTextView.setText(mealDTO.getStrInstructions());
 
-        // Load image using Glide
         Glide.with(context)
                 .load(mealDTO.getStrMealThumb())
                 .into(holder.mealImageView);
 
-        // Load YouTube video using WebView
         String videoUrl = mealDTO.getStrYoutube();
         if (videoUrl != null && videoUrl.contains("=")) {
             String videoId = videoUrl.substring(videoUrl.indexOf("=") + 1); // Extract the video ID
@@ -91,7 +88,7 @@ public class MealByIDAdapter extends RecyclerView.Adapter<MealByIDAdapter.ViewHo
         private TextView categoryNameTextView;
         private TextView areaNameTextView;
         private TextView instructionTextView;
-        private WebView webView;  // WebView for YouTube video
+        private WebView webView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -101,7 +98,7 @@ public class MealByIDAdapter extends RecyclerView.Adapter<MealByIDAdapter.ViewHo
             areaNameTextView = itemView.findViewById(R.id.area_name_text_view);
             instructionTextView = itemView.findViewById(R.id.instruction_text_view);
             mealImageView = itemView.findViewById(R.id.meal_image_view);
-            webView = itemView.findViewById(R.id.webview);  // Initialize WebView
+            webView = itemView.findViewById(R.id.webview);
         }
     }
 }

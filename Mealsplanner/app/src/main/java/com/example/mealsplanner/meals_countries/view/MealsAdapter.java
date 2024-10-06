@@ -43,7 +43,6 @@ public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.MealViewHold
     public void onBindViewHolder(@NonNull MealViewHolder holder, int position) {
         MealDTO meal = mealList.get(position);
         holder.name.setText(meal.getStrMeal());
-//        holder.meal_description.setText(meal.getStrInstructions());
 
         Glide.with(context)
                 .load(meal.getStrMealThumb())
@@ -69,7 +68,6 @@ public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.MealViewHold
         MealViewHolder(View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.meal_name2);
-//            meal_description = itemView.findViewById(R.id.meal_description);
             image = itemView.findViewById(R.id.meal_image2);
         }
     }

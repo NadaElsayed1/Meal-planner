@@ -17,24 +17,24 @@ public class CombinedFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // Inflate layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_combined, container, false);
+        return inflater.inflate(R.layout.fragment_combined, container, false);}
 
-        // Load the Categories Fragment
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Load the Meal of the Day Fragment
         getChildFragmentManager().beginTransaction()
                 .replace(R.id.random_meal_container, new MealOfTheDayFragment())
                 .commit();
 
-        // Load the Categories Fragment
+        // Load the Meal Categories Fragment
         getChildFragmentManager().beginTransaction()
                 .replace(R.id.categories_container, new MealCategoriesFragment())
                 .commit();
 
-        // Load the Countries Fragment
+        // Load the Meal Countries Fragment
         getChildFragmentManager().beginTransaction()
                 .replace(R.id.countries_container, new MealCountriesFragment())
                 .commit();
-
-        return view;
     }
 }

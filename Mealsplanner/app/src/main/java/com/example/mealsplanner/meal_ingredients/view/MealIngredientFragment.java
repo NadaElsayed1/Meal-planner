@@ -36,24 +36,22 @@ public class MealIngredientFragment extends Fragment implements IMealIngredientF
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_meal_ingredient, container, false);
+    return inflater.inflate(R.layout.fragment_meal_ingredient, container, false);}
 
-        // Prepare UI elements
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
         titleTextView = view.findViewById(R.id.ingredients_title);
         IngredientsRecyclerView = view.findViewById(R.id.IngredientListRecyclerView);
         IngredientsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        // Set adapter
         mealIngredientAdapter = new MealIngredientAdapter(getActivity(), new ArrayList<>());
         IngredientsRecyclerView.setAdapter(mealIngredientAdapter);
 
         mealRepository = new MealRepository(MealRemoteDataStructure.getInstance(), MealLocalDataSource.getInstance(requireContext()));
 
-        // Presenter and network call
         mealIngredientPresenter = new MealIngredientPresenter(mealRepository, this);
         mealIngredientPresenter.getMealIngredients();
-
-        return view;
     }
 
     @Override
@@ -66,7 +64,6 @@ public class MealIngredientFragment extends Fragment implements IMealIngredientF
                 Log.d("Showing", "Ingredient: " + meal.getStrIngredient());  // Assuming getStrIngredient() method exists
             }
         } else {
-            // Handle the case where the list is empty or null
             Log.d("Showing", "No ingredients found or list is null");
         }
     }

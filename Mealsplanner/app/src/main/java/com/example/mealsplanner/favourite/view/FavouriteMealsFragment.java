@@ -35,8 +35,10 @@ public class FavouriteMealsFragment extends Fragment implements IFavouriteMeals,
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_favourite_meals, container, false);
+        return inflater.inflate(R.layout.fragment_favourite_meals, container, false);}
 
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         Title = view.findViewById(R.id.fav_meals_title);
         favrecy = view.findViewById(R.id.rvFavMeals);
@@ -62,24 +64,19 @@ public class FavouriteMealsFragment extends Fragment implements IFavouriteMeals,
             }
         });
 
-        return view;
     }
 
     @Override
     public void RemoveItem(MealDTO mealDTO) {
-        /*to remove item from adapter's list*/
-        int position = favAdapter.getMeals().indexOf(mealDTO); /*get its position @ the list*/
-        favAdapter.removeItem(position); /*temp remove from list*/
-
-        /*show the snackbar for undo option*/
+        int position = favAdapter.getMeals().indexOf(mealDTO);
+        favAdapter.removeItem(position);
         Snackbar snackbar = Snackbar.make(favrecy, "Deleted: " + mealDTO.getStrMeal(), Snackbar.LENGTH_LONG);
 
         snackbar.setAction("Undo", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*if Undo is clicked -> reinsert the item into the adapter's list*/
                 favAdapter.restoreItem(mealDTO, position);
-                favrecy.scrollToPosition(position); // Scroll to the restored item
+                favrecy.scrollToPosition(position);
             }
         });
 
