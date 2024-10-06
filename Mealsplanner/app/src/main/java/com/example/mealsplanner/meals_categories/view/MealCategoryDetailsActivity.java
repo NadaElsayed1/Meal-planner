@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mealsplanner.R;
 import com.example.mealsplanner.db.MealLocalDataSource;
 import com.example.mealsplanner.detailed_meals.view.MealDetailsActivity;
-import com.example.mealsplanner.meals_by_categories.presenter.MealByCategoryPresenter;
-import com.example.mealsplanner.meals_by_categories.view.IMealByCategoryView;
+import com.example.mealsplanner.filter_by_categories.presenter.FilterByCategoryPresenter;
+import com.example.mealsplanner.filter_by_categories.view.IFilterByCategoryView;
 import com.example.mealsplanner.model.CategoryDTO;
 import com.example.mealsplanner.model.MealDTO;
 import com.example.mealsplanner.model.MealRepository;
@@ -19,11 +19,11 @@ import com.example.mealsplanner.network.MealRemoteDataStructure;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MealCategoryDetailsActivity extends AppCompatActivity implements OnMealClickListener, IMealByCategoryView {
+public class MealCategoryDetailsActivity extends AppCompatActivity implements OnMealClickListener, IFilterByCategoryView {
 
     private RecyclerView mealsRecyclerView2;
     private MealsAdapter mealsAdapter2;
-    private MealByCategoryPresenter mealByCategoryPresenter;
+    private FilterByCategoryPresenter filterByCategoryPresenter;
     private MealRepository mealRepository;
 
     @Override
@@ -42,8 +42,8 @@ public class MealCategoryDetailsActivity extends AppCompatActivity implements On
         mealRepository = new MealRepository(MealRemoteDataStructure.getInstance(), MealLocalDataSource.getInstance(this));
 
         mealsRecyclerView2.setLayoutManager(new LinearLayoutManager(this));
-        mealByCategoryPresenter = new MealByCategoryPresenter(mealRepository, this);
-        mealByCategoryPresenter.getMealsByCategory(categoryDTO.getStrCategory());
+        filterByCategoryPresenter = new FilterByCategoryPresenter(mealRepository, this);
+        filterByCategoryPresenter.getMealsByCategory(categoryDTO.getStrCategory());
         mealsRecyclerView2.setAdapter(mealsAdapter2);
     }
 

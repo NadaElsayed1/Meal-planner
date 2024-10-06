@@ -3,6 +3,7 @@ package com.example.mealsplanner.db;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Delete;
 
@@ -20,7 +21,7 @@ public interface MealPlannerDAO {
     @Query("SELECT * FROM meal_planner WHERE date = :date AND mealType = :mealType")
     MealPlannerDTO getMealByDateAndType(String date, String mealType);
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertMealPlan(MealPlannerDTO mealPlanner);
 
     @Delete

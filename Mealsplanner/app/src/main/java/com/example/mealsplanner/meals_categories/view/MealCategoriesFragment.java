@@ -71,7 +71,7 @@ public class MealCategoriesFragment extends Fragment implements IMealCategoriesF
 
     @Override
     public void onLayoutClick(CategoryDTO categoryDTO) {
-        Intent intent = new Intent(this.getActivity(), FilterCategoryDetailsActivity.class);
+        Intent intent = new Intent(this.getActivity(), MealCategoryDetailsActivity.class);
         intent.putExtra("MealCategory",categoryDTO);
         startActivity(intent);
     }

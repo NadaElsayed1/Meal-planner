@@ -209,32 +209,7 @@ public class MealDetailsActivity extends AppCompatActivity implements SelectMeal
             mealVideo.loadData(iframeHtml, "text/html", "utf-8");
         }
     }
-
-    public void updateMealDetails(MealPlannerDTO mealPlannerDTO) {
-        currentMealPlannedDTO = mealPlannerDTO;
-        mealName.setText(mealPlannerDTO.getStrMeal());
-        mealDescription.setText(mealPlannerDTO.getStrInstructions());
-        mealCategory.setText(mealPlannerDTO.getStrCategory());
-        mealCountry.setText(mealPlannerDTO.getStrArea());
-
-        Glide.with(this)
-                .load(mealPlannerDTO.getStrMealThumb())
-                .into(mealImage);
-
-        RecyclerView ingredientsRecyclerView = findViewById(R.id.ingredients_recycler_view);
-        ingredientsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        IngredientAdapter ingredientAdapter = new IngredientAdapter(this, mealPlannerDTO.getIngredients(), mealPlannerDTO.getMeasures());
-        ingredientsRecyclerView.setAdapter(ingredientAdapter);
-
-        String youtubeUrl = mealPlannerDTO.getStrYoutube();
-        if (youtubeUrl != null && !youtubeUrl.isEmpty()) {
-            String videoId = youtubeUrl.substring(youtubeUrl.lastIndexOf('=') + 1);
-            String iframeHtml = "<html><body><iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/" + videoId + "\" frameborder=\"0\" allowfullscreen></iframe></body></html>";
-            mealVideo.getSettings().setJavaScriptEnabled(true);
-            mealVideo.loadData(iframeHtml, "text/html", "utf-8");
-        }
-    }
+    
 
     @Override
     public void OnSelect(MealDTO mealDTO) {

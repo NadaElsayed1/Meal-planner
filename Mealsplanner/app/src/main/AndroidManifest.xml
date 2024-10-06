@@ -21,7 +21,7 @@
             android:name=".meals_countries.view.FilterCountryDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".meals_categories.view.FilterCategoryDetailsActivity"
+            android:name=".meals_categories.view.MealCategoryDetailsActivity"
             android:exported="false" />
         <activity
             android:name=".SplashActivity"
