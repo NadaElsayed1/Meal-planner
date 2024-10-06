@@ -23,9 +23,6 @@
         <activity
             android:name=".meals_categories.view.FilterCategoryDetailsActivity"
             android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".meal_of_the_day.view.MealDetailsActivity"-->
-<!--            android:exported="false" />-->
         <activity
             android:name=".SplashActivity"
             android:exported="true"

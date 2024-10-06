@@ -22,17 +22,14 @@ public class CombinedFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Load the Meal of the Day Fragment
         getChildFragmentManager().beginTransaction()
                 .replace(R.id.random_meal_container, new MealOfTheDayFragment())
                 .commit();
 
-        // Load the Meal Categories Fragment
         getChildFragmentManager().beginTransaction()
                 .replace(R.id.categories_container, new MealCategoriesFragment())
                 .commit();
 
-        // Load the Meal Countries Fragment
         getChildFragmentManager().beginTransaction()
                 .replace(R.id.countries_container, new MealCountriesFragment())
                 .commit();

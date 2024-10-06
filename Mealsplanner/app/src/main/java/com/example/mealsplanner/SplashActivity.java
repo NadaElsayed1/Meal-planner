@@ -32,7 +32,6 @@ public class SplashActivity extends AppCompatActivity {
                 String splashMessage = "Fuel your day plan your way";
                 animateText(splashText, splashMessage, 20);
 
-                // Start the MainActivity after the text animation is complete
                 splashText.postDelayed(() -> {
                     Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                     startActivity(intent);
@@ -49,8 +48,8 @@ public class SplashActivity extends AppCompatActivity {
         for (int i = 0; i < text.length(); i++) {
             final int index = i;
             handler.postDelayed(() -> {
-                textView.append(String.valueOf(text.charAt(index))); // Append one character at a time
-            }, delay * index); // Delay increases with each character
+                textView.append(String.valueOf(text.charAt(index)));
+            }, delay * index);
         }
     }
 }

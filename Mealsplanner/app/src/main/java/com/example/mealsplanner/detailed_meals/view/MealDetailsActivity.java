@@ -96,14 +96,12 @@ public class MealDetailsActivity extends AppCompatActivity implements SelectMeal
             currentMealDTO = mealDTOSearch;
         } else if (mealDTOPlanned != null) {
             mealDetailsPresenter.lookupMealById(mealDTOPlanned.getIdMeal());
-            // Make the calendar and spinner invisible
             addToPlanButton.setVisibility(View.GONE);
             mealTypeSpinner.setVisibility(View.GONE);
         }
         else if (favMealDTO != null) {
             mealDetailsPresenter.lookupMealById(favMealDTO.getIdMeal());
             currentMealDTO = favMealDTO;
-            // Make the favourite icon invisible
             addToFavBtn.setVisibility(View.GONE);
         }else {
             Log.e("MealDetailsActivity", "No MealDTO found in the intent");

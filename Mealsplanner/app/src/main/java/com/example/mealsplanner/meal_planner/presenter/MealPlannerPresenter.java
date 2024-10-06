@@ -16,7 +16,6 @@ public class MealPlannerPresenter implements IMealPlannerPresenter {
         this.view = view;
     }
 
-
     @Override
     public void removeMealFromPlanner(MealPlannerDTO mealPlannerDTO) {
         repo.deleteMealPlanned(mealPlannerDTO);

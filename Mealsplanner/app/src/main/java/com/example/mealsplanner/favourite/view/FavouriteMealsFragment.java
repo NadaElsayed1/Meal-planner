@@ -84,7 +84,6 @@ public class FavouriteMealsFragment extends Fragment implements IFavouriteMeals,
             @Override
             public void onDismissed(Snackbar transientBottomBar, int event) {
                 if (event != Snackbar.Callback.DISMISS_EVENT_ACTION) {
-                    /*if the snackbar was skipped without the undo action (really delete)*/
                     favPresenter.repo.delete(mealDTO);
                 }
             }
