@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(getResources().getColor(R.color.appTheme));}
+            getWindow().setStatusBarColor(getResources().getColor(R.color.darkToty));}
 
 
             BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
