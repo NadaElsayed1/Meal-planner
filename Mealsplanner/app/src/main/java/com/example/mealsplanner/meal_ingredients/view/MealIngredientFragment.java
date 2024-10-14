@@ -1,5 +1,6 @@
 package com.example.mealsplanner.meal_ingredients.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,25 +58,27 @@ public class MealIngredientFragment extends Fragment implements IMealIngredientF
 
     @Override
     public void showData(List<MealDTO> countriesList) {
-        if (countriesList != null && !countriesList.isEmpty())
-        {
-            mealIngredientAdapter.setList(countriesList);
-            mealIngredientAdapter.notifyDataSetChanged();
-            for (MealDTO meal : countriesList) {
-                Log.d("Showing", "Ingredient: " + meal.getStrIngredient());  // Assuming getStrIngredient() method exists
-            }
-        } else {
-            Log.d("Showing", "No ingredients found or list is null");
-        }
+        mealIngredientAdapter.setList(countriesList);
+        mealIngredientAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void showErrMsg(String errorMessage) {
         if (getActivity() != null) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setMessage(errorMessage).setTitle("An Error Occurred");
-            AlertDialog dialog = builder.create();
-            dialog.show();
+            builder.setMessage("It seems that you're offline. Please turn on your Internet connection.")
+                    .setTitle("No Internet Connection")
+                    .setPositiveButton("Turn on Wi-Fi", (dialog, which) -> {
+                        startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                    })
+                    .setNegativeButton("Turn on Mobile Data", (dialog, which) -> {
+                        startActivity(new Intent(Settings.ACTION_DATA_ROAMING_SETTINGS));
+                    })
+                    .setNeutralButton("Cancel", (dialog, which) -> {
+                        dialog.dismiss();
+                    });
+            AlertDialog dialog =  builder.create();
+                    dialog.show();
         }
     }
 }

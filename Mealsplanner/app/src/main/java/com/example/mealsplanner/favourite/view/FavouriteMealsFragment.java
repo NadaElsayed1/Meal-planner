@@ -2,6 +2,8 @@ package com.example.mealsplanner.favourite.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -78,7 +80,7 @@ public class FavouriteMealsFragment extends Fragment implements IFavouriteMeals,
                 favAdapter.restoreItem(mealDTO, position);
                 favrecy.scrollToPosition(position);
             }
-        });
+        }).setActionTextColor(ContextCompat.getColor(requireContext(), R.color.backgroundTwo));;
 
         snackbar.addCallback(new Snackbar.Callback() {
             @Override
@@ -95,13 +97,8 @@ public class FavouriteMealsFragment extends Fragment implements IFavouriteMeals,
 
     @Override
     public void onMealClick(MealDTO meal) {
-        if (meal != null) {
-            Intent intent = new Intent(getContext(), MealDetailsActivity.class);
-            intent.putExtra("favouriteMeal", meal);
-            startActivity(intent);
-            Log.d(TAG, "Meal clicked: " + meal.getStrMeal() + ", ID: " + meal.getIdMeal());
-        } else {
-            Log.e("Error: ", "Error: MealDTO object is null!");
-        }
+        Intent intent = new Intent(getContext(), MealDetailsActivity.class);
+        intent.putExtra("favouriteMeal", meal);
+        startActivity(intent);
     }
 }

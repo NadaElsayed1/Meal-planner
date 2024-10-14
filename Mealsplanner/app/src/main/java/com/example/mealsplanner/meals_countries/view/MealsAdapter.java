@@ -50,7 +50,7 @@ public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.MealViewHold
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, MealDetailsActivity.class);
-            intent.putExtra("MealDetails", meal); // meal is the selected meal
+            intent.putExtra("MealDetails", meal);
             context.startActivity(intent);
     });
     }
@@ -62,7 +62,6 @@ public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.MealViewHold
 
     static class MealViewHolder extends RecyclerView.ViewHolder {
         TextView name;
-        TextView meal_description;
         ImageView image;
 
         MealViewHolder(View itemView) {

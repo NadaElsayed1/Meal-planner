@@ -67,14 +67,9 @@ public class MealPlannerAdapter extends RecyclerView.Adapter<MealPlannerAdapter.
         holder.mealName.setText(mealPlanner.getStrMeal());
         holder.dateTextView.setText(mealPlanner.getDate());
         holder.mealTypeTextView.setText(mealPlanner.getMealType());
-        if (mealPlanner.getStrMealThumb() != null && !mealPlanner.getStrMealThumb().isEmpty()) {
-            Glide.with(context)
-                    .load(mealPlanner.getStrMealThumb())
-                    .into(holder.plannedMealImage);
-            Log.d(TAG, "Meal Image URL: " + mealPlanner.getStrMealThumb());
-        } else {
-            Log.w(TAG, "Image URL is null or empty for meal: " + mealPlanner.getStrMeal());
-        }
+        Glide.with(context)
+                .load(mealPlanner.getStrMealThumb())
+                .into(holder.plannedMealImage);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

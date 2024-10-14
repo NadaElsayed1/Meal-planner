@@ -12,7 +12,7 @@ import com.example.mealsplanner.model.Converters;
 import com.example.mealsplanner.model.MealDTO;
 import com.example.mealsplanner.model.MealPlannerDTO;
 
-@Database(entities = {MealDTO.class, MealPlannerDTO.class}, version = 4, exportSchema = false)
+@Database(entities = {MealDTO.class, MealPlannerDTO.class}, version = 2, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class MealDatabase extends RoomDatabase {
     private static MealDatabase instance = null;

@@ -9,7 +9,7 @@ import com.example.mealsplanner.network.NetworkCallback;
 
 import java.util.List;
 
-public class MealDetailsPresenter implements NetworkCallback {
+public class MealDetailsPresenter implements NetworkCallback, IMealDetailsPresenter {
     private MealRemoteDataStructure apiClient;
     private MealDetailsActivity view;
 
@@ -30,6 +30,7 @@ public class MealDetailsPresenter implements NetworkCallback {
         Log.i("TAG", "onFailureResult: ");
     }
 
+    @Override
     public void lookupMealById(String mealId) {
         apiClient.lookupMealById(mealId, this);
     }

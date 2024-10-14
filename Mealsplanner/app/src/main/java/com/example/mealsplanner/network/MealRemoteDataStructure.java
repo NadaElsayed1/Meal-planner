@@ -43,21 +43,17 @@ public class MealRemoteDataStructure {
                 if (response.isSuccessful() && response.body() != null) {
                     List<MealDTO> meals = response.body().getMeals();
                     if (meals != null && !meals.isEmpty()) {
-                        Log.d("API_CALL", "Success: " + meals);
                         networkCallback.onSuccessResult(meals);
                     } else {
-                        Log.e("API_CALL", "Meals list is null or empty");
                         networkCallback.onFailureResult("No meals found");
                     }
                 } else {
-                    Log.e("API_CALL", "Response was unsuccessful");
                     networkCallback.onFailureResult("Failed to retrieve data");
                 }
             }
 
             @Override
             public void onFailure(Call<MealResponse> call, Throwable t) {
-                Log.e("API_CALL", "Failed: " + t.getMessage());
                 networkCallback.onFailureResult(t.getMessage());
             }
         });
@@ -92,21 +88,17 @@ public class MealRemoteDataStructure {
                 if (response.isSuccessful() && response.body() != null) {
                     List<CategoryDTO> categories = response.body().getCategories();
                     if (categories != null && !categories.isEmpty()) {
-                        Log.d("API_CALL", "Success: " + categories);
                         networkCallback.onSuccessResult(categories);
                     } else {
-                        Log.e("API_CALL", "Categories list is null or empty");
                         networkCallback.onFailureResult("No categories found");
                     }
                 } else {
-                    Log.e("API_CALL", "Response was unsuccessful");
                     networkCallback.onFailureResult("Failed to retrieve data");
                 }
             }
 
             @Override
             public void onFailure(Call<CategoryResponse> call, Throwable t) {
-                Log.e("API_CALL", "Failed: " + t.getMessage());
                 networkCallback.onFailureResult(t.getMessage());
             }
         });

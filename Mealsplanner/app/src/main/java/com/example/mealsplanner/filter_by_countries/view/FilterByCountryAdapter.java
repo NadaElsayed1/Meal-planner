@@ -28,11 +28,7 @@ public class FilterByCountryAdapter extends RecyclerView.Adapter<FilterByCountry
 
     public void setList(List<MealDTO> newProducts) {
         this.meals.clear();
-        if (newProducts != null) {
-            this.meals.addAll(newProducts);
-        } else {
-            Log.e(TAG, "Received null list of meals for this Country");
-        }
+        this.meals.addAll(newProducts);
         notifyDataSetChanged();
     }
 
@@ -51,9 +47,6 @@ public class FilterByCountryAdapter extends RecyclerView.Adapter<FilterByCountry
         Glide.with(context)
                 .load(mealDTO.getStrMealThumb())
                 .into(holder.mealImageView);
-
-        Log.d("CountryAdapter", "Country loaded: " + mealDTO.getStrMeal());
-
     }
 
 

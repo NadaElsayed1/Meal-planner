@@ -1,6 +1,8 @@
 package com.example.mealsplanner.filter_by_categories.view;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,11 +60,19 @@ public class FilterByCategoryFragment extends Fragment implements IFilterByCateg
 
     @Override
     public void showErrMsg(String error) {
-        if (getActivity() != null) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setMessage(error).setTitle("An Error Occurred");
-            AlertDialog dialog = builder.create();
-            dialog.show();
-        }
+        new AlertDialog.Builder(requireContext())
+                .setMessage("It seems that you're offline. Please turn on your Internet connection.")
+                .setTitle("No Internet Connection")
+                .setPositiveButton("Turn on Wi-Fi", (dialog, which) -> {
+                    startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                })
+                .setNegativeButton("Turn on Mobile Data", (dialog, which) -> {
+                    startActivity(new Intent(Settings.ACTION_DATA_ROAMING_SETTINGS));
+                })
+                .setNeutralButton("Cancel", (dialog, which) -> {
+                    dialog.dismiss();
+                })
+                .create()
+                .show();
     }
 }

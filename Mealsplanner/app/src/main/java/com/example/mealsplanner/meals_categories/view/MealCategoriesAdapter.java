@@ -30,11 +30,7 @@ public class MealCategoriesAdapter extends RecyclerView.Adapter<MealCategoriesAd
     }
     public void setList(List<CategoryDTO> newProducts) {
         this.categories.clear();
-        if (newProducts != null) {
-            this.categories.addAll(newProducts);
-        } else {
-            Log.e(TAG, "Received null list of categories");
-        }
+        this.categories.addAll(newProducts);
         notifyDataSetChanged();
     }
 
@@ -50,12 +46,9 @@ public class MealCategoriesAdapter extends RecyclerView.Adapter<MealCategoriesAd
     public void onBindViewHolder(@NonNull MealCategoriesAdapter.ViewHolder holder, int position) {
         CategoryDTO categoryDTO = categories.get(position);
         holder.textViewCategoryName.setText(categoryDTO.getStrCategory());
-
         Glide.with(context)
                 .load(categoryDTO.getStrCategoryThumb())
                 .into(holder.imageViewCategoryThumb);
-        Log.d("CategoryAdapterImg", "Category loaded: " + categoryDTO.getStrCategory());
-
         holder.itemView.setOnClickListener(v -> {
             if (categoryClickListener != null) {
                 categoryClickListener.onLayoutClick(categoryDTO);

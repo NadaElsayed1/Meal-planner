@@ -28,18 +28,13 @@ public class MealCountriesAdapter extends RecyclerView.Adapter<MealCountriesAdap
 
     public void setList(List<MealDTO> newProducts) {
         this.meals.clear();
-        if (newProducts != null) {
-            this.meals.addAll(newProducts);
-        } else {
-            Log.e(TAG, "Received null list of meals");
-        }
+        this.meals.addAll(newProducts);
         notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public MealCountriesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        /*should be changed*/
         View view = LayoutInflater.from(context).inflate(R.layout.counry_list_row, parent, false);
         return new MealCountriesAdapter.ViewHolder(view);
     }
@@ -57,8 +52,6 @@ public class MealCountriesAdapter extends RecyclerView.Adapter<MealCountriesAdap
         });
     }
 
-
-
     @Override
     public int getItemCount() {
         return meals.size();
@@ -69,7 +62,6 @@ public class MealCountriesAdapter extends RecyclerView.Adapter<MealCountriesAdap
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            /*should be changed*/
             mealNameTextView = itemView.findViewById(R.id.country_list_title);
 
         }

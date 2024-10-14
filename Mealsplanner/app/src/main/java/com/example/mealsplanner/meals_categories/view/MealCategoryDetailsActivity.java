@@ -34,8 +34,6 @@ public class MealCategoryDetailsActivity extends AppCompatActivity implements On
         Intent intent = getIntent();
         CategoryDTO categoryDTO = (CategoryDTO) intent.getSerializableExtra("MealCategory");
 
-        Log.i("ReceivedCategoryData", "onCreate: " + categoryDTO.getStrCategory());
-
         mealsAdapter2 = new MealsAdapter(new ArrayList<>(),this,this);
         mealsRecyclerView2 = findViewById(R.id.meals_recycler_view2);
 
@@ -67,6 +65,6 @@ public class MealCategoryDetailsActivity extends AppCompatActivity implements On
 
     @Override
     public void showErrMsg(String error) {
-        Log.i("Error", "showErrMsg: ");
+        Toast.makeText(this, "Error: can't find meals for this category: ", Toast.LENGTH_SHORT).show();
     }
 }

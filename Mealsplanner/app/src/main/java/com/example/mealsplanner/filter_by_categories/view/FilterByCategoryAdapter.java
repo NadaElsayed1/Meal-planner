@@ -29,11 +29,7 @@ public class FilterByCategoryAdapter extends RecyclerView.Adapter<FilterByCatego
 
     public void setList(List<MealDTO> newProducts) {
         this.meals.clear();
-        if (newProducts != null) {
-            this.meals.addAll(newProducts);
-        } else {
-            Log.e(TAG, "Received null list of meals");
-        }
+        this.meals.addAll(newProducts);
         notifyDataSetChanged();
     }
 
@@ -52,8 +48,6 @@ public class FilterByCategoryAdapter extends RecyclerView.Adapter<FilterByCatego
          Glide.with(context)
                  .load(mealDTO.getStrMealThumb())
                  .into(holder.mealImageView);
-
-        Log.d("CategoryAdapter", "Category loaded: " + mealDTO.getStrMeal());
     }
 
 

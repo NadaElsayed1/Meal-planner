@@ -2,6 +2,7 @@ package com.example.mealsplanner.meal_of_the_day.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -56,21 +57,24 @@ public class MealOfTheDayFragment extends Fragment implements IMealOfTheDayView,
     public void showData(List<MealDTO> meals) {
         mealOfTheDayAdapter.setList(meals);
         mealOfTheDayAdapter.notifyDataSetChanged();
-        if (meals != null && !meals.isEmpty()) {
-            Log.d(TAG, "showData: Successfully updated with " + meals.size() + " meals.");
-        } else {
-            Log.d(TAG, "showData: No meals to display.");
-        }
     }
 
     @Override
     public void showErrMsg(String error) {
         new AlertDialog.Builder(requireContext())
-                .setMessage(error)
-                .setTitle("An Error Occurred")
+                .setMessage("It seems that you're offline. Please turn on your Internet connection.")
+                .setTitle("No Internet Connection")
+                .setPositiveButton("Turn on Wi-Fi", (dialog, which) -> {
+                    startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                })
+                .setNegativeButton("Turn on Mobile Data", (dialog, which) -> {
+                    startActivity(new Intent(Settings.ACTION_DATA_ROAMING_SETTINGS));
+                })
+                .setNeutralButton("Cancel", (dialog, which) -> {
+                    dialog.dismiss();
+                })
                 .create()
                 .show();
-        Log.e(TAG2, "showErrMsg: " + error);
     }
 
      @Override

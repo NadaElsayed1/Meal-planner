@@ -30,11 +30,7 @@ public class MealSearchAdapter extends RecyclerView.Adapter<MealSearchAdapter.Vi
 
     public void setList(List<MealDTO> newProducts) {
         this.meals.clear();
-        if (newProducts != null) {
-            this.meals.addAll(newProducts);
-        } else {
-            Log.e(TAG, "Received null list of meals for this Country");
-        }
+        this.meals.addAll(newProducts);
         notifyDataSetChanged();
     }
 
@@ -62,8 +58,6 @@ public class MealSearchAdapter extends RecyclerView.Adapter<MealSearchAdapter.Vi
                 }
             }
         });
-
-        Log.d("CountryAdapter", "Country loaded: " + mealDTO.getStrMeal());
     }
 
 

@@ -3,6 +3,8 @@ package com.example.mealsplanner.meals_countries.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,8 +32,6 @@ public class FilterCountryDetailsActivity extends AppCompatActivity implements O
 
         Intent intent = getIntent();
         MealDTO mealDTO = (MealDTO) intent.getSerializableExtra("Meal");
-        Log.i("ReceivedData", "onCreate: " + mealDTO.getStrMeal());
-
         mealsAdapter = new MealsAdapter(new ArrayList<>(),this,this);
 
         mealsRecyclerView = findViewById(R.id.meals_recycler_view);
@@ -59,6 +59,6 @@ public class FilterCountryDetailsActivity extends AppCompatActivity implements O
 
     @Override
     public void showErrMsg(String error) {
-        Log.i("Error", "showErrMsg: ");
+        Toast.makeText(this, "Error: can't find meals for this country: ", Toast.LENGTH_SHORT).show();
     }
 }

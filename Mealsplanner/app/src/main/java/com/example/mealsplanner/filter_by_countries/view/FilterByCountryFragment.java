@@ -1,9 +1,12 @@
 package com.example.mealsplanner.filter_by_countries.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +27,6 @@ public class FilterByCountryFragment extends Fragment implements IFilterByCountr
     TextView Title;
     RecyclerView.LayoutManager layoutManager;
     FilterByCountryAdapter filterByCountryAdapter;
-    MealRemoteDataStructure APIClient;
     FilterByCountryPresenter mealByCountryPresenter;
     private MealRepository mealRepository;
 
@@ -55,9 +57,19 @@ public class FilterByCountryFragment extends Fragment implements IFilterByCountr
 
     @Override
     public void showErrMsg(String error) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setMessage(error).setTitle("An Error Occurred");
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        new AlertDialog.Builder(requireContext())
+                .setMessage("It seems that you're offline. Please turn on your Internet connection.")
+                .setTitle("No Internet Connection")
+                .setPositiveButton("Turn on Wi-Fi", (dialog, which) -> {
+                    startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                })
+                .setNegativeButton("Turn on Mobile Data", (dialog, which) -> {
+                    startActivity(new Intent(Settings.ACTION_DATA_ROAMING_SETTINGS));
+                })
+                .setNeutralButton("Cancel", (dialog, which) -> {
+                    dialog.dismiss();
+                })
+                .create()
+                .show();
     }
 }

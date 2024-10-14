@@ -1,12 +1,15 @@
 package com.example.mealsplanner.detailed_meals.view;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.webkit.WebView;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
@@ -20,8 +23,10 @@ import com.example.mealsplanner.ingredients_show.IngredientAdapter;
 import com.example.mealsplanner.model.MealDTO;
 import com.example.mealsplanner.model.MealPlannerDTO;
 import com.example.mealsplanner.network.MealRemoteDataStructure;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Calendar;
+import java.util.List;
 
 public class MealDetailsActivity extends AppCompatActivity implements SelectMealClickListener {
 
@@ -34,7 +39,8 @@ public class MealDetailsActivity extends AppCompatActivity implements SelectMeal
     private MealLocalDataSource repo;
     private MealPlannerLocalDataSource plannerRepo;
     private MealDTO currentMealDTO;
-    private MealPlannerDTO currentMealPlannedDTO;
+    private MealPlannerDTO currentMealPlannerDTO;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,33 +87,86 @@ public class MealDetailsActivity extends AppCompatActivity implements SelectMeal
         MealDTO favMealDTO = (MealDTO) getIntent().getSerializableExtra("favouriteMeal");
 
         mealDetailsPresenter = new MealDetailsPresenter(MealRemoteDataStructure.getInstance(), this);
+        boolean isConnected = NetworkUtil.isConnected(this);
 
-        if (mealDTOCountry != null) {
-            mealDetailsPresenter.lookupMealById(mealDTOCountry.getIdMeal());
-            currentMealDTO = mealDTOCountry;
-        } else if (mealDTOCategory != null) {
-            mealDetailsPresenter.lookupMealById(mealDTOCategory.getIdMeal());
-            currentMealDTO = mealDTOCategory;
-        } else if (mealDTORandom != null) {
-            mealDetailsPresenter.lookupMealById(mealDTORandom.getIdMeal());
-            currentMealDTO = mealDTORandom;
-        } else if (mealDTOSearch != null) {
-            mealDetailsPresenter.lookupMealById(mealDTOSearch.getIdMeal());
-            currentMealDTO = mealDTOSearch;
-        } else if (mealDTOPlanned != null) {
-            mealDetailsPresenter.lookupMealById(mealDTOPlanned.getIdMeal());
-            addToPlanButton.setVisibility(View.GONE);
-            mealTypeSpinner.setVisibility(View.GONE);
-        }
-        else if (favMealDTO != null) {
-            mealDetailsPresenter.lookupMealById(favMealDTO.getIdMeal());
-            currentMealDTO = favMealDTO;
-            addToFavBtn.setVisibility(View.GONE);
-        }else {
-            Log.e("MealDetailsActivity", "No MealDTO found in the intent");
+        if (mealDTOPlanned != null || favMealDTO != null) {
+            if (mealDTOPlanned != null) {
+                currentMealPlannerDTO = getMealFromPlanner(mealDTOPlanned.getIdMeal());
+                addToPlanButton.setVisibility(View.GONE);
+                mealTypeSpinner.setVisibility(View.GONE);
+            } else if (favMealDTO != null) {
+                currentMealDTO = getMealFromFavorites(favMealDTO.getIdMeal());
+                addToFavBtn.setVisibility(View.GONE);
+            }
+            displayFavMealDetails(currentMealDTO);
+            displayPlannedMealDetails(currentMealPlannerDTO);
+        } else if (isConnected) {
+            if (mealDTOCountry != null) {
+                mealDetailsPresenter.lookupMealById(mealDTOCountry.getIdMeal());
+                currentMealDTO = mealDTOCountry;
+            } else if (mealDTOCategory != null) {
+                mealDetailsPresenter.lookupMealById(mealDTOCategory.getIdMeal());
+                currentMealDTO = mealDTOCategory;
+            } else if (mealDTORandom != null) {
+                mealDetailsPresenter.lookupMealById(mealDTORandom.getIdMeal());
+                currentMealDTO = mealDTORandom;
+            } else if (mealDTOSearch != null) {
+                mealDetailsPresenter.lookupMealById(mealDTOSearch.getIdMeal());
+                currentMealDTO = mealDTOSearch;
+            } else {
+                finish();
+            }
+        } else {
+            Toast.makeText(this, "No internet connection available. Please check your connection.", Toast.LENGTH_SHORT).show();
             finish();
         }
     }
+
+    private MealDTO getMealFromFavorites(String mealId) {
+        MealDTO mealDTO = repo.getAllMeals().getValue().stream()
+                .filter(meal -> meal.getIdMeal().equals(mealId))
+                .findFirst()
+                .orElse(null);
+        return mealDTO;
+    }
+
+    private MealPlannerDTO getMealFromPlanner(String mealId) {
+        List<MealPlannerDTO> plannedMeals = plannerRepo.getAllPlannedMeals().getValue();
+        for (MealPlannerDTO mealPlannerDTO : plannedMeals) {
+            if (mealPlannerDTO.getIdMeal().equals(mealId)) {
+                return mealPlannerDTO;
+            }
+        }
+        return null;
+    }
+
+
+    private void displayFavMealDetails(MealDTO mealDTO) {
+        if (mealDTO != null) {
+            mealName.setText(mealDTO.getStrMeal());
+            mealDescription.setText(mealDTO.getStrInstructions());
+            mealCategory.setText(mealDTO.getStrCategory());
+            mealCountry.setText(mealDTO.getStrArea());
+            Glide.with(this)
+                    .load(mealDTO.getStrMealThumb())
+                    .transform(new RoundedCorners(16))
+                    .into(mealImage);
+            mealVideo.loadUrl("https://www.youtube.com/embed/" + mealDTO.getStrYoutube().split("=")[1]);
+        }
+    }
+    private void displayPlannedMealDetails(MealPlannerDTO mealDTO){
+            if (mealDTO != null) {
+                mealName.setText(mealDTO.getStrMeal());
+                mealDescription.setText(mealDTO.getStrInstructions());
+                mealCategory.setText(mealDTO.getStrCategory());
+                mealCountry.setText(mealDTO.getStrArea());
+                Glide.with(this)
+                        .load(mealDTO.getStrMealThumb())
+                        .transform(new RoundedCorners(16))
+                        .into(mealImage);
+                mealVideo.loadUrl("https://www.youtube.com/embed/" + mealDTO.getStrYoutube().split("=")[1]);
+            }
+        }
 
     private void setupMealTypeSpinner() {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.meal_types, R.layout.custom_spinner_item);
@@ -209,16 +268,33 @@ public class MealDetailsActivity extends AppCompatActivity implements SelectMeal
             mealVideo.loadData(iframeHtml, "text/html", "utf-8");
         }
     }
-    
+
 
     @Override
     public void OnSelect(MealDTO mealDTO) {
         try {
             repo.insert(mealDTO);
-            Toast.makeText(this, "Added to favorites: " + mealDTO.getStrMeal(), Toast.LENGTH_SHORT).show();
+            Snackbar snackbar = Snackbar.make(
+                    findViewById(android.R.id.content),
+                    "Added to favorites: " + mealDTO.getStrMeal(),
+                    Snackbar.LENGTH_LONG
+            );
+            snackbar.setAction("UNDO", v -> {
+                repo.delete(mealDTO);
+                Snackbar.make(findViewById(android.R.id.content), "Removed from favorites", Snackbar.LENGTH_SHORT).show();
+            }).setActionTextColor(ContextCompat.getColor(this, R.color.backgroundTwo));
+            snackbar.show();
         } catch (Exception e) {
-            Toast.makeText(this, "Error adding to favorites!", Toast.LENGTH_SHORT).show();
-            Log.e("MealDetailsActivity", "Error adding to favorites", e);
+            Snackbar.make(findViewById(android.R.id.content), "Error adding to favorites!", Snackbar.LENGTH_SHORT).show();
         }
     }
+
+    public static class NetworkUtil {
+        public static boolean isConnected(Context context) {
+            ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+            return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+        }
+    }
+
 }

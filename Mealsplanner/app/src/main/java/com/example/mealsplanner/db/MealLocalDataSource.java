@@ -10,7 +10,7 @@ import java.util.List;
 
 public class MealLocalDataSource {
     private Context context;
-    private MealDAO mealDao; // For Room database
+    private MealDAO mealDao;
     private LiveData<List<MealDTO>> storedMeals;
     private static MealLocalDataSource productLocalDataSourcse = null;
 

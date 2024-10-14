@@ -7,6 +7,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,14 +33,11 @@ public class MealSearchFragment extends Fragment implements IMealSearchView, OnM
     private static final String TAG = "MealSearch";
     private static final String TAG2 = "ErrorAtSearch";
 
-    MealLocalDataSource repo;
     RecyclerView search;
     TextView Title;
     RecyclerView.LayoutManager layoutManager;
     MealSearchAdapter mealSearchAdapter;
-    MealRemoteDataStructure APIClient;
     MealSearchPresenter mealSearchPresenter;
-    NetworkCallback nc;
     RadioGroup radioGroup;
     RadioButton categoryButton , countryButton , ingrediantButton;
     SearchView searchView;
@@ -109,10 +108,20 @@ public class MealSearchFragment extends Fragment implements IMealSearchView, OnM
 
     @Override
     public void showErrMsg(String error) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setMessage(error).setTitle("An Error Occurred");
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        new AlertDialog.Builder(requireContext())
+                .setMessage("It seems that you're offline. Please turn on your Internet connection.")
+                .setTitle("No Internet Connection")
+                .setPositiveButton("Turn on Wi-Fi", (dialog, which) -> {
+                    startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                })
+                .setNegativeButton("Turn on Mobile Data", (dialog, which) -> {
+                    startActivity(new Intent(Settings.ACTION_DATA_ROAMING_SETTINGS));
+                })
+                .setNeutralButton("Cancel", (dialog, which) -> {
+                    dialog.dismiss();
+                })
+                .create()
+                .show();
     }
 
     @Override

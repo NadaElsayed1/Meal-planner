@@ -6,7 +6,6 @@ import com.example.mealsplanner.model.MealPlannerDTO;
 
 import java.util.List;
 
-
 public class MealPlannerPresenter implements IMealPlannerPresenter {
     public MealPlannerLocalDataSource repo;
     private IMealPlannerView view;

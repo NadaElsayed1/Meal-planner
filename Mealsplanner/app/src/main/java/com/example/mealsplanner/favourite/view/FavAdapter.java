@@ -85,7 +85,6 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.ViewHolder> {
             listener.OnClick(mealDTO);
         }
         });
-        Log.d("CategoryAdapter", "Category loaded: " + mealDTO.getStrMeal());
     }
 
 

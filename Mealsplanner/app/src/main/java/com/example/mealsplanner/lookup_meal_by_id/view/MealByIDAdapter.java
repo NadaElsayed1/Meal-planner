@@ -32,11 +32,7 @@ public class MealByIDAdapter extends RecyclerView.Adapter<MealByIDAdapter.ViewHo
 
     public void setList(List<MealDTO> newMeals) {
         this.meals.clear();
-        if (newMeals != null) {
-            this.meals.addAll(newMeals);
-        } else {
-            Log.e(TAG, "Received null list of meals for this Country");
-        }
+        this.meals.addAll(newMeals);
         notifyDataSetChanged();
     }
 
@@ -56,24 +52,16 @@ public class MealByIDAdapter extends RecyclerView.Adapter<MealByIDAdapter.ViewHo
         holder.categoryNameTextView.setText(mealDTO.getStrCategory());
         holder.areaNameTextView.setText(mealDTO.getStrArea());
         holder.instructionTextView.setText(mealDTO.getStrInstructions());
-
         Glide.with(context)
                 .load(mealDTO.getStrMealThumb())
                 .into(holder.mealImageView);
 
         String videoUrl = mealDTO.getStrYoutube();
-        if (videoUrl != null && videoUrl.contains("=")) {
-            String videoId = videoUrl.substring(videoUrl.indexOf("=") + 1); // Extract the video ID
-            String iframeHtml = "<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/" + videoId + "\" frameborder=\"0\" allowfullscreen></iframe>";
-
-            holder.webView.getSettings().setJavaScriptEnabled(true);
-            holder.webView.setWebViewClient(new WebViewClient());
-            holder.webView.loadData(iframeHtml, "text/html", "utf-8");
-        } else {
-            Log.e(TAG, "Invalid YouTube URL: " + videoUrl);
-        }
-
-        Log.d(TAG, "Loaded: " + mealDTO.getStrMeal());
+        String videoId = videoUrl.substring(videoUrl.indexOf("=") + 1); // Extract the video ID
+        String iframeHtml = "<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/" + videoId + "\" frameborder=\"0\" allowfullscreen></iframe>";
+        holder.webView.getSettings().setJavaScriptEnabled(true);
+        holder.webView.setWebViewClient(new WebViewClient());
+        holder.webView.loadData(iframeHtml, "text/html", "utf-8");
     }
 
     @Override

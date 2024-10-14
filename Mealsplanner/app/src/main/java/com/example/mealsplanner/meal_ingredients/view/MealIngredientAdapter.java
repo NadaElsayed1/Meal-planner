@@ -29,11 +29,7 @@ public class MealIngredientAdapter extends RecyclerView.Adapter<MealIngredientAd
 
     public void setList(List<MealDTO> newProducts) {
         this.meals.clear();
-        if (newProducts != null) {
-            this.meals.addAll(newProducts);
-        } else {
-            Log.e(TAG, "Received null list of meals");
-        }
+        this.meals.addAll(newProducts);
         notifyDataSetChanged();
     }
 
@@ -48,8 +44,6 @@ public class MealIngredientAdapter extends RecyclerView.Adapter<MealIngredientAd
     public void onBindViewHolder(@NonNull MealIngredientAdapter.ViewHolder holder, int position) {
         MealDTO mealDTO = meals.get(position);
         holder.mealNameTextView.setText(mealDTO.getStrIngredient());
-
-        Log.d(TAG, "Ingredient loaded: " + mealDTO.getStrIngredient());
     }
 
 

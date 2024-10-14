@@ -2,6 +2,7 @@ package com.example.mealsplanner.meals_categories.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
@@ -56,17 +57,24 @@ public class MealCategoriesFragment extends Fragment implements IMealCategoriesF
     public void showData(List<CategoryDTO> categories) {
         mealCategoriesAdapter.setList(categories);
         mealCategoriesAdapter.notifyDataSetChanged();
-        Log.i("ShowingData", "showData: " + categories.size());
     }
 
     @Override
     public void showErrMsg(String error) {
-        if (getActivity() != null) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setMessage(error).setTitle("An Error Occurred");
-            AlertDialog dialog = builder.create();
-            dialog.show();
-        }
+        new AlertDialog.Builder(requireContext())
+                .setMessage("It seems that you're offline. Please turn on your Internet connection.")
+                .setTitle("No Internet Connection")
+                .setPositiveButton("Turn on Wi-Fi", (dialog, which) -> {
+                    startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                })
+                .setNegativeButton("Turn on Mobile Data", (dialog, which) -> {
+                    startActivity(new Intent(Settings.ACTION_DATA_ROAMING_SETTINGS));
+                })
+                .setNeutralButton("Cancel", (dialog, which) -> {
+                    dialog.dismiss();
+                })
+                .create()
+                .show();
     }
 
     @Override

@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -87,48 +88,38 @@ public class MealPlannerFragment extends Fragment implements IMealPlannerView, O
     public void showMealPlans(List<MealPlannerDTO> mealPlannerList) {
         adapter.updateMealPlannerList(mealPlannerList);
         adapter.notifyDataSetChanged();
-        if (mealPlannerList != null && !mealPlannerList.isEmpty()) {
-            Log.d(TAG, "Successfully updated with " + mealPlannerList.size() + " planned meals.");
-        } else {
-            Log.d(TAG, "No planned meals to display.");
-        }
     }
 
     @Override
     public void onMealClick(MealPlannerDTO meal) {
-        if (meal != null) {
-            Intent intent = new Intent(getContext(), MealDetailsActivity.class);
-            intent.putExtra("plannedMeal", meal);
-            startActivity(intent);
-            Log.d(TAG, "Meal clicked: " + meal.getStrMeal() + ", ID: " + meal.getIdMeal());
-        } else {
-            Log.e(TAG_ERROR, "Error: MealDTO object is null!");
-        }
+        Intent intent = new Intent(getContext(), MealDetailsActivity.class);
+        intent.putExtra("plannedMeal", meal);
+        startActivity(intent);
     }
 
     @Override
     public void RemovePlannedItem(MealPlannerDTO mealPlannerDTO) {
         int position = adapter.getPlannedMeals().indexOf(mealPlannerDTO);
         adapter.removeItem(position);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("Item Deleted")
-                .setMessage("Deleted: " + mealPlannerDTO.getStrMeal() + "\nDo you want to undo this action?")
-                .setPositiveButton("Undo", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        adapter.restoreItem(mealPlannerDTO, position);
-                        mealPlannerRecyclerView.scrollToPosition(position);
-                    }
-                })
-                .setNegativeButton("Confirm", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        plannerPresenter.repo.deleteMealPlanned(mealPlannerDTO);
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        Snackbar snackbar = Snackbar.make(
+                mealPlannerRecyclerView,
+                "Deleted: " + mealPlannerDTO.getStrMeal(),
+                Snackbar.LENGTH_LONG
+        );
+        snackbar.setAction("UNDO", v -> {
+            adapter.restoreItem(mealPlannerDTO, position);
+            mealPlannerRecyclerView.scrollToPosition(position);
+        });
+        snackbar.setActionTextColor(ContextCompat.getColor(getContext(), R.color.backgroundTwo)); // Set custom color
+        snackbar.show();
+        snackbar.addCallback(new Snackbar.Callback() {
+            @Override
+            public void onDismissed(Snackbar snackbar, int event) {
+                if (event != Snackbar.Callback.DISMISS_EVENT_ACTION) {
+                    plannerPresenter.repo.deleteMealPlanned(mealPlannerDTO);
+                }
+            }
+        });
     }
+
 }

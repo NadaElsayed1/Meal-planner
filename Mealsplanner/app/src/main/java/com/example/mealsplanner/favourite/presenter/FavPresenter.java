@@ -3,7 +3,7 @@ import com.example.mealsplanner.db.MealLocalDataSource;
 import com.example.mealsplanner.favourite.view.IFavouriteMeals;
 import com.example.mealsplanner.model.MealDTO;
 
-public class FavPresenter implements IFavouriteMeals {
+public class FavPresenter implements IFavouriteMeals, IFavPresenter {
     public MealLocalDataSource repo;
     private IFavouriteMeals view;
 

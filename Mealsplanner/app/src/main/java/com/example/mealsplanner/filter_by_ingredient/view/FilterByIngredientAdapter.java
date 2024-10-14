@@ -30,11 +30,7 @@ public class FilterByIngredientAdapter extends RecyclerView.Adapter<FilterByIngr
 
     public void setList(List<MealDTO> newProducts) {
         this.meals.clear();
-        if (newProducts != null) {
-            this.meals.addAll(newProducts);
-        } else {
-            Log.e(TAG, "Received null list of meals for this Country");
-        }
+        this.meals.addAll(newProducts);
         notifyDataSetChanged();
     }
 
@@ -52,8 +48,6 @@ public class FilterByIngredientAdapter extends RecyclerView.Adapter<FilterByIngr
         Glide.with(context)
                 .load(mealDTO.getStrMealThumb())
                 .into(holder.mealImageView);
-
-        Log.d("IngredientFilterAdapter", "IngredientFilter loaded: " + mealDTO.getStrMeal());
     }
 
 
